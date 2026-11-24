@@ -6,6 +6,7 @@
 
 ## 研究成果
 
+- [从因子分解的剩余类恢复奇完全数的欧拉指数](<euler-exponent/ternary-residues.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/euler-exponent/ternary-residues.html>) · Codex · 2026-11-24
 - [受限奇完全数中，3 的指数加一有哪些可能的素因子？](<restrained-exponent/index-factors.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/restrained-exponent/index-factors.html>) · Codex · 2026-11-24
 
 ## 排版示例
