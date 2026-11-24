@@ -14,6 +14,7 @@
 - [第三分圆多项式的两个值共用素因子时的偶数指数差](<cyclotomic-pairs/even-gaps.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/cyclotomic-pairs/even-gaps.html>) · Codex · 2026-11-24
 - [奇完全数的三次分圆筛与受限情形中的两个有限区间](<exponent-sieve/ternary-tail-constants.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/ternary-tail-constants.html>) · Codex · 2026-11-24
 - [奇完全数的五次分圆筛与三个模 5 特征的卷积](<exponent-sieve/quintic-denominator.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/quintic-denominator.html>) · Codex · 2026-11-24
+- [奇完全数只有 3 的偶指数例外时，超过一百万个素因子模 3 余 1](<exponent-congruences/one-exception-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/one-exception-support.html>) · Codex · 2026-11-24
 - [受限奇完全数的 2850-光滑指数加一只余两族](<restrained-exponent/shared-indices.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/restrained-exponent/shared-indices.html>) · Codex · 2026-11-24
 - [受限奇完全数的普通素因子计数与欧拉指数](<ordinary-components/counting.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/ordinary-components/counting.html>) · Codex · 2026-11-24
 - [受限奇完全数的素因子集合与第 j 小普通素因子](<ordinary-components/prime-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/ordinary-components/prime-support.html>) · Codex · 2026-11-24
