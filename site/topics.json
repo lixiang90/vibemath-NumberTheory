@@ -1,0 +1,17 @@
+[
+  {
+    "id": "OPN",
+    "title": "奇完全数",
+    "description": "研究奇完全数的存在性，以及约数和、素因子与指数必须满足的条件。"
+  },
+  {
+    "id": "zeros-exact-distribution",
+    "title": "零点精细分布",
+    "description": "研究零点的位置、重数与间距，以及计数函数在局部区间中的变化。"
+  },
+  {
+    "id": "Goldbach_TwinPrimes",
+    "title": "哥德巴赫猜想与孪生素数猜想",
+    "description": "从素数之和与素数之差两个角度，研究偶数表示和相邻素数对。"
+  }
+]
