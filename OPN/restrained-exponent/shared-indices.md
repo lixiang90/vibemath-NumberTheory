@@ -23,6 +23,8 @@ $$
 
 这个子类中 $n$ 的上界由 $2383^{27}$ 缩至 $2383^{15}$。由 $\omega(N)\le2n+1$ 及 Nielsen 的上界，还得到 $N<2^{\,4^{2\cdot2383^{15}+1}}$。[素因子计数](../ordinary-components/counting.md) · [Nielsen 的上界](https://mathdept.byu.edu/~pace/upper_bound_web.pdf)
 
+后续的平滑丰度估计又排除这张表中最小的两个值。剩余的 12 个指数加一均被 $2383^7$ 整除。[平滑筛与最新候选](smoothed-exponent.md)
+
 ## 共用因子给出的整除障碍
 
 若 $d\mid n$ 且素数 $r\ge5$ 满足 $\operatorname{ord}_r(3)=d$，则 $r\mid\sigma(3^a)\mid2N$。若 $r$ 是普通素因子，$r^2+r+1$ 的每个素因子都整除 $N$。若为欧拉素因子，则 $r\equiv1\bmod12$，且 $r+1$ 的每个奇素因子都整除 $N$。对各个允许的身份给出一条最终强迫已排除素数的链，即证明 $d\nmid n$。
