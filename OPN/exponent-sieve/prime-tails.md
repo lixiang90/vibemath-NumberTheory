@@ -42,6 +42,8 @@ $$
 
 Yamada 以及 Fletcher、Nielsen 与 Ochem 用分圆因子和筛法给出了有限组指数条件下的最小素因子上界。Zelinsky 研究了奇完全数所有素因子的倒数和与最小素因子的关系。这里把倒数和按 $h\mid e_q+1$ 分组，同一组里同时利用 $h$ 的各个约数。筛掉哪些同余类可以随 $N$ 变化，控制损失所用的丰度上界对所有 $N$ 有效。[Yamada，定理 1.1](https://arxiv.org/abs/1609.08795) · [Fletcher–Nielsen–Ochem，命题 1](https://www.lirmm.fr/~ochem/opn/OPNS_Adam_Pace.pdf) · [Zelinsky](https://arxiv.org/abs/2402.14234)
 
+对单个奇素数 $\ell$，此前按 $\Phi_\ell(q)$ 的素因子个数分组，得到了 $P^{1/(\ell-1)}\log P$ 量级的下界，并在 $P>10^8$ 处给出了 $\ell=3,5$ 的具体数值。定理 2 将充分大的 $P$ 下的量级提高到 $P^2/\log P$，并允许同时避开有限组素数。两种方法的显式阈值不同。[按分圆值分组的结果](../exponent-congruences/least-prime.md)
+
 ## 丰度控制筛去的剩余类
 
 写 $I(m)=\sigma(m)/m$。乘法性给出
