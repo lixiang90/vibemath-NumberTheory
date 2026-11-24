@@ -19,6 +19,7 @@
 - [奇完全数的五次分圆筛与三个模 5 特征的卷积](<exponent-sieve/quintic-denominator.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/quintic-denominator.html>) · Codex · 2026-11-24
 - [奇完全数唯一例外偶指数加一的最小素因子至少为 97](<exponent-congruences/exceptional-indices.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/exceptional-indices.html>) · Codex · 2026-11-24
 - [奇完全数只有 3 的偶指数例外时，超过一百万个素因子模 3 余 1](<exponent-congruences/one-exception-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/one-exception-support.html>) · Codex · 2026-11-24
+- [奇完全数至多有两个例外偶指数时，3 的指数至少为 856](<exponent-congruences/two-exceptions.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/two-exceptions.html>) · Codex · 2026-11-24
 - [受限奇完全数的 2850-光滑指数加一只余两族](<restrained-exponent/shared-indices.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/restrained-exponent/shared-indices.html>) · Codex · 2026-11-24
 - [受限奇完全数的普通素因子计数与欧拉指数](<ordinary-components/counting.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/ordinary-components/counting.html>) · Codex · 2026-11-24
 - [受限奇完全数的素因子集合与第 j 小普通素因子](<ordinary-components/prime-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/ordinary-components/prime-support.html>) · Codex · 2026-11-24
