@@ -24,8 +24,8 @@ def small_primes(limit):
     return [p for p in range(3, limit + 1, 2) if flags[p]]
 
 
-def finite_interval(lo, hi, segment=2_000_000):
-    """Count lo < p <= hi, p not 1 mod 15, and upper-bound sum 1/(p-1)."""
+def finite_interval(lo, hi, segment=2_000_000, extra_excluded=()):
+    """Count allowed primes in (lo,hi] and upper-bound their sum of 1/(p-1)."""
     if lo < 5 or hi < lo or segment < 1:
         raise ValueError("invalid range")
     primes = small_primes(isqrt(hi))
@@ -43,9 +43,10 @@ def finite_interval(lo, hi, segment=2_000_000):
                 offset += p
             if offset < size:
                 flags[offset::p] = bytes((size - 1 - offset)//p + 1)
-        # first + 2*i == 1 mod 15 iff i == excluded mod 15.
-        excluded = (8*(1 - first)) % 15
-        flags[excluded::15] = bytes(len(range(excluded, size, 15)))
+        # Solve first + 2*i == a modulo 15 for each excluded residue.
+        for a in (1, *extra_excluded):
+            excluded = (8*(a - first)) % 15
+            flags[excluded::15] = bytes(len(range(excluded, size, 15)))
         left = 0
         while left < size:
             denominator = first + 2*left - 1

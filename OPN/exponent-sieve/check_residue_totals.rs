@@ -15,6 +15,8 @@ fn main() {
     }
     let mut total = 0;
     let mut weight = 0u64;
+    let mut both_count = 0;
+    let mut both_weight = 0u64;
     for residue in [7, 11, 13, 17, 19, 23, 29] {
         // For p > 5, determine where 30k+residue is zero modulo p.
         let mut progressions = Vec::new();
@@ -27,6 +29,7 @@ fn main() {
         }
         let mut begin = (START - residue) / 30 + 1;
         let end = (STOP - residue) / 30 + 1;
+        let (mut class_count, mut class_weight) = (0u64, 0u64);
         while begin < end {
             let next = (begin + 32768).min(end);
             let mut allowed = vec![true; (next - begin) as usize];
@@ -42,12 +45,19 @@ fn main() {
             for (j, keep) in allowed.into_iter().enumerate() {
                 if keep {
                     let denominator = 30 * (begin + j as u64) + residue - 1;
-                    weight += PRECISION.div_ceil(denominator);
-                    total += 1;
+                    class_weight += PRECISION.div_ceil(denominator);
+                    class_count += 1;
                 }
             }
             begin = next;
         }
+        total += class_count;
+        weight += class_weight;
+        if matches!(residue, 17 | 23 | 29) {
+            both_count += class_count;
+            both_weight += class_weight;
+        }
     }
     println!("admissible primes {total}, reciprocal upper numerator {weight}, scale {PRECISION}");
+    println!("classes 2, 8, 14 mod 15: {both_count} primes, upper numerator {both_weight}");
 }
