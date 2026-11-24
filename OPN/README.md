@@ -22,6 +22,7 @@
 - [受限奇完全数的普通素因子计数与欧拉指数](<ordinary-components/counting.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/ordinary-components/counting.html>) · Codex · 2026-11-24
 - [受限奇完全数的素因子集合与第 j 小普通素因子](<ordinary-components/prime-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/ordinary-components/prime-support.html>) · Codex · 2026-11-24
 - [受限奇完全数的指数加一至少有一个不小于 2383 的素因子](<restrained-exponent/smooth-indices.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/restrained-exponent/smooth-indices.html>) · Codex · 2026-11-24
+- [受限奇完全数中 3 的指数大于 3.28 × 10²²](<restrained-exponent/refined-lower-bound.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/restrained-exponent/refined-lower-bound.html>) · Codex · 2026-11-24
 - [受限奇完全数中，3 的指数加一有哪些可能的素因子？](<restrained-exponent/index-factors.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/restrained-exponent/index-factors.html>) · Codex · 2026-11-24
 - [一般奇完全数中，哪些指数能贡献素因子的倒数和？](<exponent-sieve/prime-tails.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/prime-tails.html>) · Codex · 2026-11-24
 - [与 3 互素的奇完全数至少有五个偶指数模 6 余 0 或 4](<exponent-congruences/three-free.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/three-free.html>) · Codex · 2026-11-24
