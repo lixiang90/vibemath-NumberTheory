@@ -49,7 +49,7 @@ def window(u, window_order):
     log_u = math.log(u)
     frequency = BAND * abs(log_u)
     integral, _ = quad(lambda t: math.exp(-math.cosh(t)), 0, 5.5,
-                       weight="cos", wvar=frequency, epsabs=3e-15, epsrel=3e-14)
+                       weight="cos", wvar=frequency, epsabs=2e-14, epsrel=1e-13)
     return (2 * integral / J) * np.sinc(4 * log_u / np.pi)**(2 * window_order)
 
 
@@ -112,9 +112,10 @@ class CharacterFamily:
         self.log_conductor = math.log(self.conductor)
         self.log_x = math.log(q - 2)
         if twisted:
-            # Input primes q are 1 mod 3. Lift each residue to 1 and 2 mod 3.
-            plus = residues + q * ((1 - residues) % 3)
-            minus = residues + q * ((2 - residues) % 3)
+            # Lift each residue to the two unit classes modulo 3.
+            inverse_q = pow(q, -1, 3)
+            plus = residues + q * (((1 - residues) * inverse_q) % 3)
+            minus = residues + q * (((2 - residues) * inverse_q) % 3)
             self.u = np.concatenate((plus, minus)) / self.conductor
         else:
             self.u = residues / q

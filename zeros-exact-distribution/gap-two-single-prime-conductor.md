@@ -72,7 +72,7 @@ $$
 \tag{6}
 $$
 
-下述移线界对固定阶导数同样适用，故无穷远的边界项消失。式 (6) 的尺度权可以变号并延伸至原幂次窗口之外。第 3 节用剩余类的间隔直接估计尾部。推导使用经典 Dirichlet 函数方程，不需要原证明所选好窗口的存在性或 Dirichlet GRH。[归档的 mellin_ramp 引理](https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/MellinRamp.lean#L59) · [NIST，贝塞尔函数的积分表示](https://dlmf.nist.gov/10.32.E9)
+下述移线界对固定阶导数同样适用，故无穷远的边界项消失。式 (6) 的尺度权可以变号并延伸至原幂次窗口之外。第 3 节用剩余类的间隔直接估计尾部。推导使用经典 Dirichlet 函数方程，不需要原证明所选好窗口的存在性或 Dirichlet GRH。[归档的 mellin_ramp 引理](https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauTheorems/MellinRamp.lean#L9) · [NIST，贝塞尔函数的积分表示](https://dlmf.nist.gov/10.32.E9)
 
 傅里叶反演先在 $\Re s=0$ 上给出 $\int_0^\infty w_B(u)u^{s-1}\,du=H_B(s)$，再由解析延拓得到整个条带 $|\Re s|<\pi B/2$ 内的等式。事实上，沿 $t$ 平移任意小于 $\pi/2$ 的虚量仍然可积。具体写 $a=3B/8$，向衰减方向移 $3/8$，并用 $\cosh t\ge 1+t^2/2$，得到
 
