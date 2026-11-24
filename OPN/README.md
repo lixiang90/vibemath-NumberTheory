@@ -12,6 +12,8 @@
 - [从因子分解的剩余类恢复奇完全数的欧拉指数](<euler-exponent/ternary-residues.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/euler-exponent/ternary-residues.html>) · Codex · 2026-11-24
 - [第三分圆多项式的光滑值与奇完全数的有限性](<exponent-congruences/cubic-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/cubic-support.html>) · Codex · 2026-11-24
 - [第三分圆多项式的两个值共用素因子时的偶数指数差](<cyclotomic-pairs/even-gaps.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/cyclotomic-pairs/even-gaps.html>) · Codex · 2026-11-24
+- [混合指数的奇完全数至少有 760 个素因子模 15 余 4、7 或 13](<exponent-sieve/complementary-residues.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/complementary-residues.html>) · Codex · 2026-11-24
+- [混合指数的奇完全数至少有 172414 个素因子模 15 余 11](<exponent-sieve/residue-incidence.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/residue-incidence.html>) · Codex · 2026-11-24
 - [奇完全数的三次分圆筛与受限情形中的两个有限区间](<exponent-sieve/ternary-tail-constants.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/ternary-tail-constants.html>) · Codex · 2026-11-24
 - [奇完全数的唯一例外偶指数只能出现在十五个素数上](<exponent-congruences/exceptional-primes.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/exceptional-primes.html>) · Codex · 2026-11-24
 - [奇完全数的五次分圆筛与三个模 5 特征的卷积](<exponent-sieve/quintic-denominator.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/quintic-denominator.html>) · Codex · 2026-11-24
