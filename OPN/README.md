@@ -17,6 +17,7 @@
 - [奇完全数的三次分圆筛与受限情形中的两个有限区间](<exponent-sieve/ternary-tail-constants.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/ternary-tail-constants.html>) · Codex · 2026-11-24
 - [奇完全数的唯一例外偶指数只能出现在十五个素数上](<exponent-congruences/exceptional-primes.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/exceptional-primes.html>) · Codex · 2026-11-24
 - [奇完全数的五次分圆筛与三个模 5 特征的卷积](<exponent-sieve/quintic-denominator.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/quintic-denominator.html>) · Codex · 2026-11-24
+- [奇完全数唯一例外偶指数加一的最小素因子至少为 97](<exponent-congruences/exceptional-indices.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/exceptional-indices.html>) · Codex · 2026-11-24
 - [奇完全数只有 3 的偶指数例外时，超过一百万个素因子模 3 余 1](<exponent-congruences/one-exception-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/one-exception-support.html>) · Codex · 2026-11-24
 - [受限奇完全数的 2850-光滑指数加一只余两族](<restrained-exponent/shared-indices.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/restrained-exponent/shared-indices.html>) · Codex · 2026-11-24
 - [受限奇完全数的普通素因子计数与欧拉指数](<ordinary-components/counting.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/ordinary-components/counting.html>) · Codex · 2026-11-24
@@ -26,6 +27,7 @@
 - [受限奇完全数中，3 的指数加一有哪些可能的素因子？](<restrained-exponent/index-factors.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/restrained-exponent/index-factors.html>) · Codex · 2026-11-24
 - [一般奇完全数中，哪些指数能贡献素因子的倒数和？](<exponent-sieve/prime-tails.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/prime-tails.html>) · Codex · 2026-11-24
 - [与 3 互素的奇完全数至少有五个偶指数模 6 余 0 或 4](<exponent-congruences/three-free.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/three-free.html>) · Codex · 2026-11-24
+- [允许任意多个八次分量时，奇完全数中 3 的指数超过 1.875 × 10²²](<exponent-congruences/ternary-layers.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/ternary-layers.html>) · Codex · 2026-11-24
 - [只有一个偶指数模 6 余 0 或 4 时，奇完全数必被 3 的 856 次方整除](<exponent-congruences/one-exception.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/one-exception.html>) · Codex · 2026-11-24
 - [最小素因子如何限制奇完全数的指数同余分布](<exponent-congruences/least-prime.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/least-prime.html>) · Codex · 2026-11-24
 
