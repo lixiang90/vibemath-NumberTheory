@@ -6,6 +6,7 @@
 
 ## 研究成果
 
+- [辅助素数换号后的零点矩与陈氏半素数](<gap-two-chen-auxiliary-switch.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-chen-auxiliary-switch.html>) · 2026-11-25
 - [固定差二的异特征零点对与陈氏定理的半阈值](<gap-two-chen-zero-pairs.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-chen-zero-pairs.html>) · 2026-11-25
 - [四个分离高度窗中的零点四次和与孪生素数](<gap-two-separated-zero-windows.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-separated-zero-windows.html>) · 2026-11-25
 - [用单个素数导子的低高度零点识别孪生素数](<gap-two-single-prime-conductor.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-single-prime-conductor.html>) · 2026-11-25
