@@ -39,8 +39,9 @@ struct Sieve {
 }
 
 impl Sieve {
-    fn new(cutoff: usize, upper: usize) -> Self {
+    fn new(cutoff: usize, upper: usize, residue_mod_6: Option<usize>) -> Self {
         assert!(cutoff >= 19 && cutoff < upper && upper <= cutoff * cutoff);
+        assert!(matches!(residue_mod_6, None | Some(1) | Some(5)));
         let first = (cutoff + 1) | 1;
         let total = (upper + 2 - first) / 2;
         let mut wheel = vec![1; 3 * 5 * 7 * 11 * 13 * 17 * 19];
@@ -59,6 +60,11 @@ impl Sieve {
             };
             if p <= upper.isqrt() {
                 forbid(0);
+            }
+            if p == 3 {
+                if let Some(residue) = residue_mod_6 {
+                    forbid(3 - residue % 3);
+                }
             }
             if p % 3 == 1 {
                 let root = (2..p)
@@ -100,12 +106,13 @@ impl Sieve {
 
 fn main() {
     let args: Vec<_> = env::args().skip(1).collect();
-    assert!(args.len() == 3, "expected cutoff upper threads");
+    assert!((3..=4).contains(&args.len()), "expected cutoff upper threads [residue_mod_6]");
     let cutoff: usize = args[0].parse().unwrap();
     let upper: usize = args[1].parse().unwrap();
     let threads: usize = args[2].parse().unwrap();
     assert!(threads >= 1);
-    let sieve = Sieve::new(cutoff, upper);
+    let residue = args.get(3).map(|value| value.parse().unwrap());
+    let sieve = Sieve::new(cutoff, upper, residue);
     let next = AtomicUsize::new(0);
     let totals = thread::scope(|scope| {
         let handles: Vec<_> = (0..threads).map(|_| scope.spawn(|| {
@@ -123,7 +130,8 @@ fn main() {
         handles.into_iter().map(|h| h.join().unwrap())
             .fold((0u64, 0u128), |(n, s), (k, t)| (n + k, s + t))
     });
-    println!("{{\"cutoff\":{cutoff},\"upper\":{upper},\"survivors\":{},\"scaled_reciprocal_upper\":{},\"scale\":{SCALE}}}", totals.0, totals.1);
+    let class = residue.map_or(String::new(), |r| format!(",\"residue_mod_6\":{r}"));
+    println!("{{\"cutoff\":{cutoff},\"upper\":{upper},\"survivors\":{},\"scaled_reciprocal_upper\":{},\"scale\":{SCALE}{class}}}", totals.0, totals.1);
 }
 
 #[cfg(test)]
@@ -134,11 +142,12 @@ mod tests {
         n >= 2 && (2..=n.isqrt()).all(|d| n % d != 0)
     }
 
-    fn direct(cutoff: usize, lower: usize, upper: usize) -> (u64, u128) {
+    fn direct(cutoff: usize, lower: usize, upper: usize, residue: Option<usize>) -> (u64, u128) {
         let divisors: Vec<_> = (5..=cutoff).filter(|&p| trial_prime(p)).collect();
         let mut answer = (0u64, 0u128);
         for s in lower..=upper {
-            if trial_prime(s) && divisors.iter().all(|p| (s*s+s+1) % p != 0) {
+            if residue.is_none_or(|r| s % 6 == r) && trial_prime(s)
+                    && divisors.iter().all(|p| (s*s+s+1) % p != 0) {
                 answer.0 += 1;
                 answer.1 += SCALE.div_ceil((s-1) as u64) as u128;
             }
@@ -149,8 +158,10 @@ mod tests {
     #[test]
     fn segmented_sum_matches_direct_trial_division() {
         for (cutoff, upper) in [(19, 20), (20, 31), (31, 961), (97, 7938), (100, 10000)] {
-            let sieve = Sieve::new(cutoff, upper);
-            assert_eq!(sieve.segment(0), direct(cutoff, cutoff+1, upper));
+            for residue in [None, Some(1), Some(5)] {
+                let sieve = Sieve::new(cutoff, upper, residue);
+                assert_eq!(sieve.segment(0), direct(cutoff, cutoff+1, upper, residue));
+            }
         }
     }
 
@@ -160,7 +171,7 @@ mod tests {
         let start = 3*5*7*11*13*17*19 - 64;
         let first = 4003 + 2*start;
         let upper = first + 254;
-        let sieve = Sieve::new(cutoff, upper);
-        assert_eq!(sieve.segment(start), direct(cutoff, first, upper));
+        let sieve = Sieve::new(cutoff, upper, None);
+        assert_eq!(sieve.segment(start), direct(cutoff, first, upper, None));
     }
 }
