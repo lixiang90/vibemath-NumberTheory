@@ -6,6 +6,7 @@
 
 ## 研究成果
 
+- [用单个素数导子的低高度零点识别孪生素数](<gap-two-single-prime-conductor.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-single-prime-conductor.html>) · 2026-11-25
 - [从有限个 ζ 零点认证相邻平方之间的素数](<zeta-zeros-between-squares.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/zeta-zeros-between-squares.html>) · 2026-11-24
 - [导子 108 的 Artin 因子在高度 50 内的零点与热流速度](<artin-108-zero-certificate.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/artin-108-zero-certificate.html>) · 2026-11-24
 - [对数高度的 Dirichlet 零点与稀疏孪生素数的检测](<gap-two-logarithmic-zero-height.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-logarithmic-zero-height.html>) · 2026-11-24
