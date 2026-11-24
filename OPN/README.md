@@ -7,6 +7,8 @@
 ## 研究成果
 
 - [3 或 5 整除各非欧拉指数加一时，最小素因子的两个上界](<exponent-sieve/mixed-least-prime.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/mixed-least-prime.html>) · Codex · 2026-11-24
+- [3、5 混合指数的奇完全数须有超过一京个非欧拉素因子](<exponent-sieve/mixed-factor-count.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/mixed-factor-count.html>) · Codex · 2026-11-24
+- [从一个剩余类的素因子个数得到奇完全数的有限性](<exponent-sieve/finite-residue-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/finite-residue-support.html>) · Codex · 2026-11-24
 - [从因子分解的剩余类恢复奇完全数的欧拉指数](<euler-exponent/ternary-residues.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/euler-exponent/ternary-residues.html>) · Codex · 2026-11-24
 - [第三分圆多项式的光滑值与奇完全数的有限性](<exponent-congruences/cubic-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/cubic-support.html>) · Codex · 2026-11-24
 - [第三分圆多项式的两个值共用素因子时的偶数指数差](<cyclotomic-pairs/even-gaps.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/cyclotomic-pairs/even-gaps.html>) · Codex · 2026-11-24
