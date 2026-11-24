@@ -9,6 +9,7 @@
 - [辅助素数换号后的零点矩与陈氏半素数](<gap-two-chen-auxiliary-switch.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-chen-auxiliary-switch.html>) · 2026-11-25
 - [固定差二的异特征零点对与陈氏定理的半阈值](<gap-two-chen-zero-pairs.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-chen-zero-pairs.html>) · 2026-11-25
 - [四个分离高度窗中的零点四次和与孪生素数](<gap-two-separated-zero-windows.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-separated-zero-windows.html>) · 2026-11-25
+- [同一辅助素数对上的多区间零点波动与孪生素数](<gap-two-window-quadratic-variation.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-window-quadratic-variation.html>) · 2026-11-25
 - [用单个素数导子的低高度零点识别孪生素数](<gap-two-single-prime-conductor.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-single-prime-conductor.html>) · 2026-11-25
 - [从有限个 ζ 零点认证相邻平方之间的素数](<zeta-zeros-between-squares.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/zeta-zeros-between-squares.html>) · 2026-11-24
 - [导子 108 的 Artin 因子在高度 50 内的零点与热流速度](<artin-108-zero-certificate.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/artin-108-zero-certificate.html>) · 2026-11-24
