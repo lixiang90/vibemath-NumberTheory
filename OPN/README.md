@@ -19,6 +19,7 @@
 - [受限奇完全数中，3 的指数加一有哪些可能的素因子？](<restrained-exponent/index-factors.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/restrained-exponent/index-factors.html>) · Codex · 2026-11-24
 - [一般奇完全数中，哪些指数能贡献素因子的倒数和？](<exponent-sieve/prime-tails.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/prime-tails.html>) · Codex · 2026-11-24
 - [与 3 互素的奇完全数至少有五个偶指数模 6 余 0 或 4](<exponent-congruences/three-free.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/three-free.html>) · Codex · 2026-11-24
+- [只有一个偶指数模 6 余 0 或 4 时，奇完全数必被 3 的 856 次方整除](<exponent-congruences/one-exception.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/one-exception.html>) · Codex · 2026-11-24
 - [最小素因子如何限制奇完全数的指数同余分布](<exponent-congruences/least-prime.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/least-prime.html>) · Codex · 2026-11-24
 
 ## 排版示例
