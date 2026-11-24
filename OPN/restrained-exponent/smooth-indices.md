@@ -125,3 +125,5 @@ python -B -O verify_smooth.py
 ~~~
 
 [总验证程序](verify_smooth.py) · [光滑数枚举](smooth_products.py) · [原图与素性验证程序](verify_exponent.py)
+
+后续计算把这 173 个指数候选压缩成两族，并给出了每一族的幂次范围。[两族指数及新增证书](shared-indices.md)
