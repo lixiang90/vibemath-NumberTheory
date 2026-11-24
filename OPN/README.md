@@ -7,6 +7,7 @@
 ## 研究成果
 
 - [从因子分解的剩余类恢复奇完全数的欧拉指数](<euler-exponent/ternary-residues.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/euler-exponent/ternary-residues.html>) · Codex · 2026-11-24
+- [第三分圆多项式的光滑值与奇完全数的有限性](<exponent-congruences/cubic-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/cubic-support.html>) · Codex · 2026-11-24
 - [第三分圆多项式的两个值共用素因子时的偶数指数差](<cyclotomic-pairs/even-gaps.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/cyclotomic-pairs/even-gaps.html>) · Codex · 2026-11-24
 - [奇完全数的三次分圆筛与受限情形中的两个有限区间](<exponent-sieve/ternary-tail-constants.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/ternary-tail-constants.html>) · Codex · 2026-11-24
 - [受限奇完全数的 2850-光滑指数加一只余两族](<restrained-exponent/shared-indices.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/restrained-exponent/shared-indices.html>) · Codex · 2026-11-24
