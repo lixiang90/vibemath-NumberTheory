@@ -10,6 +10,7 @@
 - [辅助素数换号后的零点矩与陈氏半素数](<gap-two-chen-auxiliary-switch.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-chen-auxiliary-switch.html>) · 2026-11-25
 - [共同好窗口内三段分离零点的相关与半素数的端点相位](<gap-two-coherent-zero-heights.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-coherent-zero-heights.html>) · 2026-11-25
 - [固定差二的异特征零点对与陈氏定理的半阈值](<gap-two-chen-zero-pairs.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-chen-zero-pairs.html>) · 2026-11-25
+- [可分解线性筛与固定差二零点计数的反演](<gap-two-linear-sieve-cubic-inversion.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-linear-sieve-cubic-inversion.html>) · 2026-11-25
 - [切换筛与固定差二三阶零点均值的显式上界](<gap-two-switched-cubic-bound.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-switched-cubic-bound.html>) · 2026-11-25
 - [四个分离高度窗中的零点四次和与孪生素数](<gap-two-separated-zero-windows.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-separated-zero-windows.html>) · 2026-11-25
 - [同一辅助素数对上的多区间零点波动与孪生素数](<gap-two-window-quadratic-variation.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-window-quadratic-variation.html>) · 2026-11-25
