@@ -18,5 +18,10 @@
     "id": "Elliott–Halberstam",
     "title": "Elliott–Halberstam 猜想",
     "description": "研究等差数列中素数的分布，以及不同 Dirichlet 特征的零点如何影响对模数取平均的误差。"
+  },
+  {
+    "id": "ERH",
+    "title": "数域的广义黎曼猜想",
+    "description": "研究 Dedekind ζ 函数的零点、素数在数域中的分裂，以及从 Dirichlet L 函数推广到数域所需的估计。"
   }
 ]
