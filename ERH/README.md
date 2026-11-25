@@ -6,5 +6,9 @@
 
 ## 研究成果
 
+- [从连续幂次窗口到判别式 −23 的离散素数判据](<cubic23-sparse-windows.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cubic23-sparse-windows.html>) · 2026-11-25
+- [判别式 −23 的全尺度素数估计与最小高斯平滑量](<cubic23-gaussian-threshold.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cubic23-gaussian-threshold.html>) · 2026-11-25
 - [判别式 −23 的三次域及其六次闭包在高度 64 内的零点](<cubic23-zeros.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cubic23-zeros.html>) · 2026-11-25
+- [判别式 −23 的三次域在高度 1024 内的全部非平凡零点位置](<cubic23-height-1024.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cubic23-height-1024.html>) · 2026-11-25
+- [判别式 −23 的完全分裂素数在有限尺度上的平方根误差与偏差](<cubic23-gaussian-bias.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cubic23-gaussian-bias.html>) · 2026-11-25
 - [完全分裂素数的一条局部下界与数域 ERH](<splitting-prime-criterion.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/splitting-prime-criterion.html>) · 2026-11-25

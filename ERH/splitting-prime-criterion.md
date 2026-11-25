@@ -115,3 +115,5 @@ $$
 原证明的 `QH.MeanSq` 对每个满足 $|\kappa(m)|\le1$ 的权成立，但其左侧还乘以 Jacobi 符号 $(m/q)$，并对辅助素数 $q$ 求均方。将 $b(p^j)/\log p$ 按域次归一化，可以放进这个有界权的位置。得到的是带辅助扭转的平均估计。最终使用的 `QH.Ind` 和 `QH.Box` 限定了本原 Dirichlet 特征及其在互素整数上的取值，`EveryCharacter` 的量词也仍是 Dirichlet 特征。判别式 $-23$ 的例子在同一剩余类中同时出现迹 $2$ 与 $-1$，式 (2) 对**任意固定模数**给出了这项差异。[原归档中的 MeanSq、Ind、Box 和 GoodQ](https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/AutomorphicArithmetic/MeanSquareBounds/PrimeSetTwoBounds.lean) · [带窗口与辅助素数的均方定理](https://github.com/leanprover-community/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/AutomorphicArithmetic/MeanSquareBounds/meanSqK.lean)
 
 因此，一个具体的推广目标是在每个尺度 $y$ 控制 (4) 中**固定数域、去掉辅助扭转的 Frobenius 迹**。定理 2 允许上侧任意波动，所需的算术输入只是一致的下界。单个区间或若干未覆盖全部尺度的区间，要推出同一结论还需要相应的跨尺度论证。对第一个三次例子，这个下界有一个只用二元二次型表示素数的版本。[判别式 −23 的具体不等式](cubic23-zeros.md)
+
+对判别式 $-23$，后续工作把这个跨尺度步骤落实为两个判据。固定高斯方差时，只须在任意远的幂次窗口上控制离散短缺。允许方差缓慢增长时，还可将窗口缩到长度任意慢地趋于无穷的连续整数对数尺度。[固定方差的离散窗口](cubic23-sparse-windows.md) · [变方差的整数窗口](cubic23-gaussian-threshold.md)
