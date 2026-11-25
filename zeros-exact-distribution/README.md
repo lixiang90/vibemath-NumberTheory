@@ -7,6 +7,7 @@
 ## 研究成果
 
 - [陈氏半素数的因子比例与固定差二的三阶零点阈值](<gap-two-chen-factor-ratios.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-chen-factor-ratios.html>) · 2026-11-25
+- [分端点的三段零点与陈氏候选的显式下界](<gap-two-explicit-chen-zero-lower-bound.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-explicit-chen-zero-lower-bound.html>) · 2026-11-25
 - [辅助素数换号后的零点矩与陈氏半素数](<gap-two-chen-auxiliary-switch.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-chen-auxiliary-switch.html>) · 2026-11-25
 - [共同好窗口内三段分离零点的相关与半素数的端点相位](<gap-two-coherent-zero-heights.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-coherent-zero-heights.html>) · 2026-11-25
 - [固定差二的异特征零点对与陈氏定理的半阈值](<gap-two-chen-zero-pairs.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/articles/gap-two-chen-zero-pairs.html>) · 2026-11-25
