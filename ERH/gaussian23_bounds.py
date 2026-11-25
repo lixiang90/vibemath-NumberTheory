@@ -98,5 +98,33 @@ def main():
         print("Variance slope at real-part cap", real_cap.str(12), slope.str(12))
 
 
+def high_certificate_bounds():
+    height = 8192
+    data = intervals("zeros23-8192.csv")
+    require(all(d == 64 and 0 <= a < b <= height*d and b == a + 1 for a, b, d in data),
+            "Invalid height-8192 interval")
+    require(all(first[1] <= second[0] for first, second in zip(data, data[1:])),
+            "Overlapping or unordered intervals")
+    below_old = [row for row in data if row[1] <= 1024 * row[2]]
+    require(below_old == intervals("zeros23-1024.csv"), "Independent low table disagrees")
+    counts = [sum(b <= t*d for _, b, d in data) for t in (1024, 2048, 4096, height)]
+    require(counts == [1845, 4143, 9188, 20185], "Certified cumulative counts")
+    print("Cumulative counts to height 8192", counts)
+    high_tail = 5 * (4 + height**2) * exp(-arb(99)/2 - arb(1)/8)
+    artin_error = 5 * 29 * exp(-arb(25)/2) + high_tail + exp(-15) + 30 * exp(-30)
+    require(artin_error < arb("0.001"), "Longer finite-height certificate and all-scale bound")
+    require(height**2 - 100 == 67108764, "Unit-variance endpoint")
+    quarter = arb(1) / 4
+    caps = [(arb(1), "1.491e-8"), (arb(31)/32, "1.397e-8"),
+            (arb("0.8733326374459052"), "1.113e-8")]
+    for cap, upper in caps:
+        slope = (2 * cap - 1) / (height**2 - cap**2 + quarter)
+        require(slope < arb(upper), "Height-8192 slope")
+        if cap == arb(31)/32:
+            require(slope < arb(1)/2**26, "Dyadic slope at index 26")
+        print("Height-8192 slope at cap", cap.str(12), slope.str(13))
+
+
 if __name__ == "__main__":
     main()
+    high_certificate_bounds()

@@ -1,4 +1,4 @@
-"""Verify every zero of the level-23 Artin factor up to height 1024 (python-flint 0.9.0)."""
+"""Certify the critical-strip zeros of the level-23 Artin factor (python-flint 0.9.0)."""
 
 import argparse
 import csv
@@ -9,55 +9,70 @@ from flint import acb, acb_poly, arb, ctx
 
 
 ctx.prec = 288
-HEIGHT = 1024
-MESH = 1024
-LAST = 9 * MESH
 HALF = arb(1) / 2
 PI = arb.pi()
 C = arb(23).sqrt() / (2 * PI)
-ALPHA = PI / 2 - arb(1) / 16
-PHASE = acb(0, ALPHA / 2).exp()
-STRIP = arb(1) / 32
-NORM = 2**29
-FREQUENCY = 2 * PI * MESH
-ALIAS = 2 * NORM * (-(FREQUENCY - HEIGHT) * STRIP).exp() / (1 - (-FREQUENCY * STRIP).exp())
-edge = STRIP * arb(9).exp()
-TAIL = 8 * (edge + 1) * (-edge).exp() / STRIP**4
-ERROR = arb(0, ALIAS + TAIL)
 
 
-def make_polynomial():
-    ray = acb(0, 1) * acb(0, ALPHA).exp() / arb(23).sqrt()
+class Quadrature:
+    """Parameters and rigorous error bounds for the rotated Mellin integral."""
+
+    def __init__(self, height):
+        cutoff, norm_power = {1024: (9, 29), 8192: (12, 44)}[height]
+        self.height = self.mesh = height
+        self.last = cutoff * self.mesh
+        self.alpha = PI / 2 - arb(64) / height
+        self.phase = acb(0, self.alpha / 2).exp()
+        strip = arb(32) / height
+        self.norm = 2**norm_power
+        if not (self.alpha + strip).cos() / C > strip:
+            raise ArithmeticError("Invalid decay rate at the edge of the integration strip")
+        strip_norm = 4 / ((1 - (-strip).exp())**2 * strip**3)
+        if not strip_norm < self.norm:
+            raise ArithmeticError("Integration strip norm exceeds the assumed bound")
+        frequency = 2 * PI * self.mesh
+        self.alias = (2 * self.norm * (-(frequency - height) * strip).exp()
+                      / (1 - (-frequency * strip).exp()))
+        edge = strip * arb(cutoff).exp()
+        self.tail = 8 * (edge + 1) * (-edge).exp() / strip**4
+        self.error = arb(0, self.alias + self.tail)
+
+
+DEFAULT = Quadrature(1024)
+
+
+def make_polynomial(rule=DEFAULT):
+    ray = acb(0, 1) * acb(0, rule.alpha).exp() / arb(23).sqrt()
     coefficients = []
-    for j in range(LAST + 1):
-        tau = ray * (arb(j) / MESH).exp()
+    for j in range(rule.last + 1):
+        tau = ray * (arb(j) / rule.mesh).exp()
         value = tau.modular_eta() * (23 * tau).modular_eta()
         coefficients.append(value / 2 if j == 0 else value)
     return acb_poly(coefficients)
 
 
-def top_value(top_poly, sigma):
+def top_value(top_poly, sigma, rule=DEFAULT):
     # The height phase is already in the coefficients. The argument is real.
-    left = PHASE * top_poly((arb(sigma) / MESH).exp())
+    left = rule.phase * top_poly((arb(sigma) / rule.mesh).exp())
     if sigma == HALF:
-        return acb(2 * left.real / MESH + ERROR)
-    dual = PHASE * top_poly((arb(1 - sigma) / MESH).exp())
-    return (left + dual.conjugate()) / MESH + acb(ERROR, ERROR)
+        return acb(2 * left.real / rule.mesh + rule.error)
+    dual = rule.phase * top_poly((arb(1 - sigma) / rule.mesh).exp())
+    return (left + dual.conjugate()) / rule.mesh + acb(rule.error, rule.error)
 
 
-def line_intervals(poly, grid):
+def line_intervals(poly, grid, rule=DEFAULT):
     # Chirp convolution evaluates the same trapezoid at every t=m/grid.
-    length = HEIGHT * grid
-    chirps = [acb(0, arb(k * k) / (2 * MESH * grid)).exp()
-              for k in range(max(length, LAST) + 1)]
-    coeff = [poly[j] * (arb(j) / (2 * MESH)).exp() * chirps[j]
-             for j in range(LAST + 1)]
-    kernel = [chirps[abs(k)].conjugate() for k in range(-LAST, length + 1)]
+    length = rule.height * grid
+    chirps = [acb(0, arb(k * k) / (2 * rule.mesh * grid)).exp()
+              for k in range(max(length, rule.last) + 1)]
+    coeff = [poly[j] * (arb(j) / (2 * rule.mesh)).exp() * chirps[j]
+             for j in range(rule.last + 1)]
+    kernel = [chirps[abs(k)].conjugate() for k in range(-rule.last, length + 1)]
     convolution = acb_poly(coeff) * acb_poly(kernel)
     intervals = []
     previous = None
     for m in range(length + 1):
-        value = 2 * (PHASE * chirps[m] * convolution[m + LAST]).real / MESH + ERROR
+        value = 2 * (rule.phase * chirps[m] * convolution[m + rule.last]).real / rule.mesh + rule.error
         if value > 0:
             sign = 1
         elif value < 0:
@@ -70,17 +85,17 @@ def line_intervals(poly, grid):
     return intervals
 
 
-def winding_count(poly):
+def winding_count(poly, rule=DEFAULT):
     mesh, degree = 256, 40
     segments = 3 * mesh // 2
-    top_poly = acb_poly([poly[j] * acb(0, arb(HEIGHT * j) / MESH).exp()
-                         for j in range(LAST + 1)])
-    values = [top_value(top_poly, HALF + arb(j) / mesh) for j in range(segments + 1)]
+    top_poly = acb_poly([poly[j] * acb(0, arb(rule.height * j) / rule.mesh).exp()
+                         for j in range(rule.last + 1)])
+    values = [top_value(top_poly, HALF + arb(j) / mesh, rule) for j in range(segments + 1)]
     rows = [values]
     for _ in range(degree):
         row = rows[-1]
         rows.append([b - a for a, b in zip(row, row[1:])])
-    remainder = arb(NORM * factorial(degree)) / mesh**(degree + 1)
+    remainder = arb(rule.norm * factorial(degree)) / mesh**(degree + 1)
     change, least = arb(0), arb(1)
     for j in range(segments):
         forward = j + degree <= segments
@@ -95,27 +110,25 @@ def winding_count(poly):
             raise ArithmeticError(f"Unresolved top edge segment {j}: {margin}")
         least = min(least, margin.lower())
         change += (values[j + 1] / values[j]).arg()
-    s = acb(2, HEIGHT)
-    unrotate = (acb(0, ALPHA) * (s - HALF)).exp()
+    s = acb(2, rule.height)
+    unrotate = (acb(0, rule.alpha) * (s - HALF)).exp()
     l_value = values[-1] * unrotate * (-s * C.log()).exp() * s.rgamma()
     if not l_value.real > 0:
         raise ArithmeticError("Unresolved Euler-product argument")
-    angle = HEIGHT * C.log() + s.lgamma().imag + l_value.arg() - 3 * ALPHA / 2 - change
+    angle = rule.height * C.log() + s.lgamma().imag + l_value.arg() - 3 * rule.alpha / 2 - change
     return angle / PI, least
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--csv", action="store_true", help="emit the certified intervals as CSV")
+    parser.add_argument("--height", type=int, choices=(1024, 8192), default=1024,
+                        help="upper height of the certified rectangle (default: 1024)")
     args = parser.parse_args()
-    if not (ALPHA + STRIP).cos() / C > STRIP:
-        raise ArithmeticError("Invalid decay rate at the edge of the integration strip")
-    strip_norm = 4 / ((1 - (-STRIP).exp())**2 * STRIP**3)
-    if not strip_norm < NORM:
-        raise ArithmeticError("Integration strip norm exceeds the assumed bound")
-    poly = make_polynomial()
-    winding, margin = winding_count(poly)
-    intervals = line_intervals(poly, 64)
+    rule = Quadrature(args.height)
+    poly = make_polynomial(rule)
+    winding, margin = winding_count(poly, rule)
+    intervals = line_intervals(poly, 64, rule)
     number = len(intervals)
     if not (winding.contains(number) and winding > number - HALF and winding < number + HALF):
         raise ArithmeticError(f"{number} line intervals vs. strip winding {winding}")
@@ -124,8 +137,8 @@ def main():
         table.writerow(("lower_numerator", "upper_numerator", "denominator"))
         table.writerows(intervals)
     else:
-        print("Quadrature alias bound", ALIAS.str(6))
-        print("Quadrature truncation bound", TAIL.str(6))
+        print("Quadrature alias bound", rule.alias.str(6))
+        print("Quadrature truncation bound", rule.tail.str(6))
         print("Top edge coordinate margin", margin.str(6))
         print("Winding enclosure", winding.str(65))
         print("Certified positive-height intervals", number)
