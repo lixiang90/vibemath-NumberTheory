@@ -12,6 +12,7 @@
 | [奇完全数](OPN/) | [阅读该领域](https://lixiang90.github.io/vibemath-NumberTheory/OPN/) |
 | [零点精细分布](zeros-exact-distribution/) | [阅读该领域](https://lixiang90.github.io/vibemath-NumberTheory/zeros-exact-distribution/) |
 | [哥德巴赫猜想与孪生素数猜想](Goldbach_TwinPrimes/) | [阅读该领域](https://lixiang90.github.io/vibemath-NumberTheory/Goldbach_TwinPrimes/) |
+| [Elliott–Halberstam 猜想](Elliott%E2%80%93Halberstam/) | [阅读该领域](https://lixiang90.github.io/vibemath-NumberTheory/Elliott%E2%80%93Halberstam/) |
 <!-- topics:end -->
 
 每个领域的目录分别列出研究成果和排版示例。点击题名即可阅读全文。
