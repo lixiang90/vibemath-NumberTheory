@@ -13,5 +13,10 @@
     "id": "Goldbach_TwinPrimes",
     "title": "哥德巴赫猜想与孪生素数猜想",
     "description": "从素数之和与素数之差两个角度，研究偶数表示和相邻素数对。"
+  },
+  {
+    "id": "Elliott–Halberstam",
+    "title": "Elliott–Halberstam 猜想",
+    "description": "研究等差数列中素数的分布，以及不同 Dirichlet 特征的零点如何影响对模数取平均的误差。"
   }
 ]
