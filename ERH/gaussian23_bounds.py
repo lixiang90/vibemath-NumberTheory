@@ -87,7 +87,12 @@ def main():
     print("log Y endpoints at b=1 and b=31/32", T**2 - 100, arb(16) * (T**2 - 100) / 15)
     b = (777 - arb(1081).sqrt()) / 852
     print("log Y endpoint at Liu's B_2", ((T**2 - 100) / (2 * b - 1)).str(16))
-    for real_cap, rounded in [(arb(31) / 32, "8.941e-7"), (b, "7.122e-7")]:
+    mixed = arb("0.8733326374459052")
+    mixed_end = (T**2 - 100) / (2 * mixed - 1)
+    require(mixed_end > 1404211, "Fixed-variance endpoint with mixed moments")
+    print("log Y endpoint at the rounded mixed-moment cap", mixed_end.str(16))
+    for real_cap, rounded in [(arb(31) / 32, "8.941e-7"), (b, "7.122e-7"),
+                              (mixed, "7.121e-7")]:
         slope = (2 * real_cap - 1) / (T**2 - real_cap**2 + quarter)
         require(slope < arb(rounded), "Slope with external zero-free half-plane")
         print("Variance slope at real-part cap", real_cap.str(12), slope.str(12))

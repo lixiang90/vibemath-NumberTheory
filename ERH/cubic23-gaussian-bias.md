@@ -136,7 +136,7 @@ $$
  u\le\frac{1024^2-100}{2b-1}. \tag{10}
 $$
 
-例如，Cureton–Thorner 的 Dedekind 无零半平面可用于 $\zeta_K=\zeta L$，取 $b=31/32$ 得上限 $1118374.4$。若采用 Liu 预印本定理 1.1 对有限阶 Hecke 特征的界 $b=(777-\sqrt{1081})/852$，则由 $L=L_k(s,\psi)$ 得上限大于 $1404026$。式 (1)、(2) 所列的基准范围只用 $b=1$。在任一固定的有限范围之外，仍须取得无界序列上的算术控制。[Cureton–Thorner 的定理与 Lean 工程](https://github.com/AxiomMath/DedekindZetaZeroFree) · [Liu 的预印本，定理 1.1](https://hexagonmath.org/pdf/2611.00082v1) · [无界离散窗口的等价判据](cubic23-sparse-windows.md)
+例如，Cureton–Thorner 的 Dedekind 无零半平面可用于 $\zeta_K=\zeta L$，取 $b=31/32$ 得上限 $1118374.4$。若采用 Liu 预印本定理 1.1 对有限阶 Hecke 特征的界 $b=(777-\sqrt{1081})/852$，则由 $L=L_k(s,\psi)$ 得上限大于 $1404026$。采用 Liu 的 11 月 20 日混合矩预印本定理 7.33，取向上舍入的 $b=0.8733326374459052$，同一上限大于 $1404211$。式 (1)、(2) 所列的基准范围只用 $b=1$。在任一固定的有限范围之外，仍须取得无界序列上的算术控制。[Cureton–Thorner 的定理与 Lean 工程](https://github.com/AxiomMath/DedekindZetaZeroFree) · [Liu 的预印本，定理 1.1](https://hexagonmath.org/pdf/2611.00082v1) · [混合矩预印本，定理 7.33](https://hexagonmath.org/pdf/2611.00741v1) · [无界离散窗口的等价判据](cubic23-sparse-windows.md)
 
 运行 `python -B ERH/gaussian23_bounds.py` 可核对 (1)、(2)、(5)、(10) 中的数值余量以及两份高度证书的低零点端点。该程序只使用 `python-flint==0.9.0` 和仓库附带的 CSV。[常数与区间复核](gaussian23_bounds.py) · [高度 1024 的独立复算](verify_zeros23_1024.py)
 

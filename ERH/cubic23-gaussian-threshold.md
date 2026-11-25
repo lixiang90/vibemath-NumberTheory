@@ -98,7 +98,7 @@ $$
  0\le\lambda_{23}\le\frac1{1024^2-3/4}<9.537\cdot10^{-7}. \tag{5}
 $$
 
-若已有独立的全高度实部上界 $\beta\le b$，$1/2<b\le1$，则 (5) 的右端可改为 $(2b-1)/(1024^2-b^2+1/4)$。用 Cureton–Thorner 的 $b=31/32$ 得 $\lambda_{23}<8.941\cdot10^{-7}$。若再采用 Liu 预印本定理 1.1 的 $b=(777-\sqrt{1081})/852$，上界为 $7.122\cdot10^{-7}$。式 (5) 与 (1) 的常数略有不同，因为 (1) 还在每个尺度明确控制绝对误差常数。[Cureton–Thorner 定理及其形式化](https://github.com/AxiomMath/DedekindZetaZeroFree) · [Liu 对有限阶 Hecke 特征的预印本](https://hexagonmath.org/pdf/2611.00082v1)
+若已有独立的全高度实部上界 $\beta\le b$，$1/2<b\le1$，则 (5) 的右端可改为 $(2b-1)/(1024^2-b^2+1/4)$。用 Cureton–Thorner 的 $b=31/32$ 得 $\lambda_{23}<8.941\cdot10^{-7}$。若再采用 Liu 预印本定理 1.1 的 $b=(777-\sqrt{1081})/852$，上界为 $7.122\cdot10^{-7}$。采用其 11 月 20 日预印本定理 7.33 时，可取向上舍入值 $b=0.8733326374459052$，得到 $\lambda_{23}<7.121\cdot10^{-7}$。式 (5) 与 (1) 的常数略有不同，因为 (1) 还在每个尺度明确控制绝对误差常数。[Cureton–Thorner 定理及其形式化](https://github.com/AxiomMath/DedekindZetaZeroFree) · [Liu 对有限阶 Hecke 特征的预印本](https://hexagonmath.org/pdf/2611.00082v1) · [混合矩预印本，定理 7.33](https://hexagonmath.org/pdf/2611.00741v1)
 
 ### 有限组相位如何强迫素数短缺
 
