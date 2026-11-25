@@ -55,13 +55,17 @@ def hardy_sign(chi, t):
 @cache
 def zero_ordinates(conductor, label):
     chi = dirichlet_char(conductor, label)
-    expected = zero_count(chi)
+    return isolate_ordinates(chi, HEIGHT, zero_count(chi))
+
+
+def isolate_ordinates(chi, height, expected):
+    """Isolate critical-line roots until the brackets exhaust an independent count."""
     for subdivisions in (8, 16, 32, 64):
         brackets = []
-        left = -HEIGHT
+        left = -height
         sign = hardy_sign(chi, left)
-        for index in range(1, 2 * HEIGHT * subdivisions + 1):
-            right = -HEIGHT + index / subdivisions
+        for index in range(1, 2 * height * subdivisions + 1):
+            right = -height + index / subdivisions
             next_sign = hardy_sign(chi, right)
             if next_sign != sign:
                 brackets.append((left, right, sign))
