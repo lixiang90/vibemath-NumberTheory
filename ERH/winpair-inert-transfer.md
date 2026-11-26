@@ -167,3 +167,5 @@ $$
 有限多个宿主的惰性指示函数无法逐点覆盖所有素数。完全分裂于它们合成域的素数使所有这些指示函数同时为零。例如 $q=11,d=263,p=37$，有 $q\mid d+1$，且 $10^2\equiv-11,\ 12^2\equiv-263\bmod37$。三次多项式在 37 的根为 $8,13,16$，所以这个 $p$ 恰在固定目标 $S$ 中。正确的四象限指示函数是 $(1\pm u_p)(1\pm v_p)/4$。若固定一对与 $2D_M$ 互素的不同辅助素数，每个非平凡二次子域都在 $q$ 或 $d$ 分歧，故宿主的双二次合成域与 $M$ 线性无交。由 Chebotarev 定理，在 $M$ 完全分裂的四个象限各占全体素数的 $1/(4n)$。式 (2) 和 (3) 进一步处理了宿主随窗口移动时的误差。
 
 原代码的 $\operatorname{PairGood}$ 还要求对一族扭转的对数导数和零点盒作统一控制，$\operatorname{VWinAt}$ 对相应数域与子窗口另有量词。固定同余类的素数定理本身不能满足这些条件，$Y^{3/2}/\exp(Y^e)\to0$ 也表明仅有 $\exp(Y^e)$ 量级的例外数上界无法保证多项式尺度上的宿主存在。本文已经处理了真实 $\operatorname{WinPair}$ 中增长的同余模。要推出全高度 ERH，仍须从几何侧给出 (5) 或 (7) 中含有正确主项的单侧界。式 (2) 和 (3) 对任何 $S$ 都成立，本身没有为这个固定 $S$ 提供相对 $x/48$ 的抵消。[原 PairGood 的完整条件](https://github.com/leanprover-community/riemann-hypothesis/blob/9c9f665ed79ce0fa8da61bd803b7a4bf1ad62ed0/src/Development/AutomorphicArithmetic/CharacterBoxes/PairGood.lean#L55)
+
+对 (7) 的后续研究已证明短区间上的严格上界，给出一亿以内固定域计数的逐点证书，并将原幂次窗口上的充分条件降到超额正部的一个加权积分。[主项为 x/48 的素数上界能在哪些区间证明？](cm229-one-sided-primes.md)
