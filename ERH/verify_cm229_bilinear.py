@@ -4,7 +4,7 @@ Requires python-flint 0.9.0 and the companion files verify_cm229.py,
 verify_tetra3136.py, verify_cm229_binomial.py and verify_cm229_split_primes.py.
 """
 
-from math import isqrt
+from math import gcd, isqrt
 
 from flint import arb, ctx, fmpz
 
@@ -86,25 +86,28 @@ def prefix_sums(values):
         values[i] += values[i-1]
 
 
-def bilinear_prefix(a, powers, z, limit):
-    """Build (9) at product indices with both variables strictly above z."""
+def bilinear_prefix(a, powers, z, limit, *, ell_min=None, coprime=False):
+    """Build (9) with separate strict cutoffs and an optional coprimality restriction."""
+    v = z if ell_min is None else ell_min
+    max_h = limit // (v + 1)
+    events = [arb(0) for _ in range(limit + 1)]
+    if max_h <= z:
+        return events
     inverse = [0, 1] + [0] * (z - 1)
     for d in range(2, z + 1):
         inverse[d] = -sum(a[j] * inverse[d // j] for j in range(2, d + 1) if d % j == 0)
-    max_h = limit // (z + 1)
     residual = [0] * (max_h + 1)
     residual[1] = 1
     for d in range(1, z + 1):
         if inverse[d]:
             for j in range(1, max_h // d + 1):
                 residual[d*j] -= inverse[d] * a[j]
-    events = [arb(0) for _ in range(limit + 1)]
     for q, b in powers:
-        if z < q <= max_h:
+        if v < q <= limit // (z + 1):
             for h in range(z + 1, limit // q + 1):
                 t = h*q
                 weight = (1 + CHI4[t % 4]) * residual[h]
-                if weight:
+                if weight and (not coprime or gcd(h, q) == 1):
                     events[t] += weight * b / 2
     prefix_sums(events)
     return events

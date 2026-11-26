@@ -145,6 +145,19 @@ theorem square_carry_trace (j : Fin 6) :
   revert j
   decide +kernel
 
+/-- Pair the two ideal classes interchanged by conjugation in C₃. -/
+def cubicClassWeight (principal conjugate : Int) (i : Nat) : Int :=
+  if i = 0 then principal else conjugate
+
+theorem cubic_class_pairing (a b c d : Int) :
+    (([0, 1, 2] : List Nat).map fun i =>
+      (([0, 1, 2] : List Nat).map fun j =>
+        (if (i + j) % 3 = 0 then (2 : Int) else -1) *
+          cubicClassWeight a b i * cubicClassWeight c d j).sum).sum =
+    2 * (a - b) * (c - d) := by
+  simp [cubicClassWeight]
+  grind
+
 def cubicRoots (p : Nat) : List Nat :=
   (List.range p).filter fun x => (x^3 + 1) % p == (4*x) % p
 
