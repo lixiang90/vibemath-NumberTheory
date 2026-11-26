@@ -100,8 +100,8 @@ def unit_errors():
     return bounds
 
 
-def read_rows(path=FILE):
-    blocks = {name: [] for name in FACTORS}
+def read_rows(path=FILE, names=FACTORS):
+    blocks = {name: [] for name in names}
     with path.open(encoding="utf-8", newline="") as handle:
         reader = csv.reader(handle)
         if tuple(next(reader)) != ("factor", *HEADER):

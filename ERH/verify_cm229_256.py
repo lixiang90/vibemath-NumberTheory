@@ -5,6 +5,7 @@ Run with python-flint 0.9.0. Pass --regenerate to reconstruct the interval CSV.
 
 import argparse
 import csv
+from dataclasses import replace
 from pathlib import Path
 
 from flint import acb, arb, ctx, dirichlet_char
@@ -16,6 +17,8 @@ from verify_tetra3136 import (
 
 
 FILE = Path(__file__).with_name("cm229-zeros256.csv")
+RATIONAL_FILE = Path(__file__).with_name("cm229-rational-zeros256.csv")
+RATIONAL_DEN = 2**22
 RULE = FourierRule(height=256, samples=8192, modes=2000, right=176, extra=90,
                    denominator=2**14)
 PARAMETERS = {"real": (229, 0), "cm_twist": (3664, 1)}
@@ -54,13 +57,24 @@ def rational_masses():
 
 class CompletedBeta:
     def __init__(self):
-        self.rule = RULE
+        self.rule = replace(RULE, denominator=RATIONAL_DEN)
         self.factors = GammaFactors(4, (1,))
         self.chi = dirichlet_char(4, 3)
 
     def top(self, offset):
         s = acb(arb(1)/2+offset, self.rule.height)
         return self.factors.value(s)*s.dirichlet_l(self.chi)
+
+    def line(self, numerator):
+        s = acb(arb(1)/2, arb(numerator)/self.rule.denominator)
+        value = self.factors.value(s)*s.dirichlet_l(self.chi)
+        if not value.imag.contains(0):
+            raise ArithmeticError("beta critical-line enclosure is not real")
+        return value.real
+
+    def grid(self, divisions):
+        step = self.rule.denominator//divisions
+        return [self.line(j*step) for j in range(self.rule.height*divisions+1)]
 
 
 def rational_counts():
@@ -82,6 +96,45 @@ def rational_counts():
     if integer is None or (2*beta_half).unique_fmpz() != 2*integer:
         raise ArithmeticError("beta rectangle winding is ambiguous")
     return lo, int(integer)
+
+
+def rational_intervals(nz, nd):
+    rows = []
+    for zero in acb.zeta_zeros(1, nz):
+        scaled = RATIONAL_DEN*zero.imag
+        lo = scaled.floor().unique_fmpz()
+        if lo is None or not (zero.real == arb(1)/2 and lo < scaled < lo+1):
+            raise ArithmeticError("an indexed zeta zero is not inside its critical-line interval")
+        rows.append((int(lo), int(lo)+1, RATIONAL_DEN))
+    beta = CompletedBeta()
+    beta_rows = locate(beta, divisions=4)
+    verify_signs(beta, beta_rows)
+    if len(beta_rows) != nd:
+        raise ArithmeticError("beta critical-line intervals do not exhaust the rectangle")
+    return {"zeta": rows, "beta": beta_rows}
+
+
+def separation(blocks):
+    ordered = []
+    for name, rows in blocks.items():
+        for lo, hi, den in rows:
+            if RATIONAL_DEN % den:
+                raise ValueError("endpoints must lie on the common dyadic grid")
+            scale = RATIONAL_DEN//den
+            ordered.append((lo*scale, hi*scale, name))
+    ordered.sort()
+    gap = min(b[0]-a[1] for a, b in zip(ordered, ordered[1:]))
+    if gap <= 0:
+        raise ArithmeticError("two of the four factors' isolating intervals meet")
+    return gap
+
+
+def write_rows(path, blocks):
+    with path.open("w", encoding="utf-8", newline="") as destination:
+        writer = csv.writer(destination, lineterminator="\n")
+        writer.writerow(("factor", *HEADER))
+        for name, rows in blocks.items():
+            writer.writerows((name, *row) for row in rows)
 
 
 def check_boundary_poles():
@@ -134,6 +187,9 @@ def main():
         check_boundary_poles()
         check_at_three()
         nz, nd = rational_counts()
+        rational_rows = rational_intervals(nz, nd)
+        if not args.regenerate and rational_rows != read_rows(RATIONAL_FILE, rational_rows):
+            raise ArithmeticError("rational zero table differs from its reconstructed intervals")
         print("rational zeta and beta positive zeros through 256", nz, nd, flush=True)
     for name, (conductor, shift) in PARAMETERS.items():
         print(name, "constructing the completed function", flush=True)
@@ -157,6 +213,7 @@ def main():
     if min(cross) <= 0:
         raise ArithmeticError("overlapping intervals for the two factors")
     print("least separation between different factors", min(cross), "/", RULE.denominator)
+    print("least separation among all four factors", separation(blocks | rational_rows), "/", RATIONAL_DEN)
     print("field counts with multiplicity", "F", nz+len(blocks["real"]),
           "E", nz+nd+sum(map(len, blocks.values())))
     mz, md = rational_masses()
@@ -178,11 +235,8 @@ def main():
             raise ArithmeticError("finite-range improvement fails at its endpoint bounds")
         print("field zero sum relative to target power", d.str(7), envelope.str(10))
     if args.regenerate:
-        with FILE.open("w", encoding="utf-8", newline="") as destination:
-            writer = csv.writer(destination, lineterminator="\n")
-            writer.writerow(("factor", *HEADER))
-            for name, rows in blocks.items():
-                writer.writerows((name, *row) for row in rows)
+        write_rows(FILE, blocks)
+        write_rows(RATIONAL_FILE, rational_rows)
 
 
 if __name__ == "__main__":
