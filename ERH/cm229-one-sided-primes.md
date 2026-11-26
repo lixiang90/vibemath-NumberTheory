@@ -146,3 +146,5 @@ $$
 python -m pip install python-flint==0.9.0
 python verify_cm229_split_primes.py
 ~~~
+
+后续工作给出了 $P(Y)$ 在完整窗口上的精确增长指数，将正部实现为 Hermitian 格的正次数，并用混合 CM 型的 $a$ 数识别双惰性素数。[完整窗口与整值多项式格](cm229-binomial-slopes.md) · [局部长度和两尺度斜坡](cm229-local-length-window.md)

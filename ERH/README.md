@@ -6,6 +6,8 @@
 
 ## 研究成果
 
+- [完整窗口上的正部积分与整值多项式格的正次数](<cm229-binomial-slopes.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-binomial-slopes.html>) · 2026-11-27
+- [用 CM 约化的局部长度识别 x/48 素数，并消去几何斜坡的线性项](<cm229-local-length-window.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-local-length-window.html>) · 2026-11-27
 - [判别式 229 的全实三次域及其 CM 扩张的两类高度与 192 个零点](<cm229-heights-and-zeros.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-heights-and-zeros.html>) · 2026-11-26
 - [全实域和 CM 域中成对的二次 Hecke 素数窗口](<real-cm-prime-windows.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/real-cm-prime-windows.html>) · 2026-11-26
 - [一个四面体数域的 123 个零点与完全分裂素数的负偏差](<tetra3136-prime-bias.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/tetra3136-prime-bias.html>) · 2026-11-26
