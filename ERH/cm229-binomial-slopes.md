@@ -120,6 +120,8 @@ $$
 
 上面的二项式单射给出的右端大小为 $\asymp W Y^{3/4}$，因为 $\log\binom{2n}{n}\asymp n$ 且 $\sum_{Y\le n<X}k_n n\asymp W\sqrt X$。这一步量出了直接用有理整值多项式比较时的损失。Minkowski 定理也可对各个分式理想 $\mathcal L_n^{k_n}$ 分别取非零元素，使每个无穷位的绝对值至多 $C_B(\mathrm N_B\mathcal L_n^{k_n})^{1/[B:\mathbb Q]}$。用这些元素作对角线，(6) 的右端至多为 $\widehat{\deg}_+(\mathcal W_Y)+O_B(X)$，但此估计的右端仍含待控制的理想范数。要由 (6) 证明所求积分界，尚须用区分 $M/B$ 三阶分裂信息的几何估计，把奇异值代价压到 $W Y^{o(1)}$。[原几何证明中的行列式与局部增益](https://hexagonmath.org/pdf/2611.00812) · [用混合 CM 型实际提取所需的分裂信息](cm229-local-length-window.md)
 
+后续工作从一个混合 CM 型求出了 $\mathcal L_n$ 的正有理生成元，使 (6) 在每个窗口严格取等。只读取平方根以上的素数，额外代价为 $O(W\log Y)$。在本例的 ERH 下，最小代价与 $W\log Y$ 的比值有正的极限。[最优整同构](cm229-optimal-splitting-map.md) · [临界线上的对数渐近式](cm229-critical-logarithm.md)
+
 ## 三个完整窗口的计算
 
 下表的第三列是**固定域**的 $\int_Y^{Y^{3/2}}[\Theta_S(x)/4-x/48]_+x^{-3/2}\,dx$，$S$ 为 $M$ 的完全分裂素数。计算移动宿主平均 $P(Y)$ 另需相应的有限抽样误差。第二列是 (2) 的离散积分。

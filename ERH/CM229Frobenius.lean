@@ -99,6 +99,28 @@ theorem two_mixed_types_suffice :
        (aNumber (permutations[j.val]?.getD []) q b.val == 3)) = (j == 0 && q) := by
   decide +kernel
 
+/-- Parity of the permutation on the three real embeddings, via inversions. -/
+def oddPermutation (g : List Nat) : Bool :=
+  let values := fun i => g[i]?.getD i
+  let inversions := [(0,1), (0,2), (1,2)].filter fun (i,j) => values i > values j
+  inversions.length % 2 == 1
+
+/-- A single mixed reduction, together with the two quadratic characters. -/
+def mixedRelativeSplit (g : List Nat) (iInert : Bool) (minority : Nat) : Bool :=
+  oddPermutation g || (aNumber g iInert minority == (if iInert then 3 else 0))
+
+/-- Relative Frobenius is the base residue-degree power of rational Frobenius. -/
+def relativeFrobTrivial (g : List Nat) (iInert : Bool) : Bool :=
+  let step := frobenius g iInert
+  embeddings.all fun e =>
+    (if oddPermutation g || iInert then step (step e) else step e) == e
+
+theorem single_mixed_relative_split (j : Fin 6) (iInert : Bool) (minority : Fin 3) :
+    mixedRelativeSplit (permutations[j.val]?.getD []) iInert minority.val =
+      relativeFrobTrivial (permutations[j.val]?.getD []) iInert := by
+  revert j iInert minority
+  decide +kernel
+
 def cubicRoots (p : Nat) : List Nat :=
   (List.range p).filter fun x => (x^3 + 1) % p == (4*x) % p
 
