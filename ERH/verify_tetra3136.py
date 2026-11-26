@@ -6,6 +6,7 @@ All sign and winding decisions use enclosing Arb balls.
 
 import argparse
 import csv
+from dataclasses import dataclass
 from math import factorial, isqrt, prod
 from pathlib import Path
 
@@ -28,6 +29,31 @@ PI = arb.pi()
 HALF = arb(1) / 2
 STEP = arb(PERIOD) / SAMPLES
 FREQ = 2 * PI / PERIOD
+
+
+@dataclass(frozen=True)
+class FourierRule:
+    height: int = HEIGHT
+    samples: int = SAMPLES
+    modes: int = MODES
+    right: int = RIGHT
+    extra: int = EXTRA
+    denominator: int = DEN
+
+    @property
+    def period(self):
+        return 4 * self.height
+
+    @property
+    def step(self):
+        return arb(self.period) / self.samples
+
+    @property
+    def frequency(self):
+        return 2 * arb.pi() / self.period
+
+
+DEFAULT_RULE = FourierRule()
 
 
 def artin_coefficients(limit):
@@ -86,8 +112,9 @@ class GammaFactors:
         self.shifts = tuple(shifts)
         self.degree = len(self.shifts)
         self.decay = arb(self.degree) / 2
-        self.log_scale = (arb(conductor).log() - self.degree * PI.log()) / 2
-        self.constant = PI ** (-arb(sum(self.shifts)) / 2)
+        pi = arb.pi()
+        self.log_scale = (arb(conductor).log() - self.degree * pi.log()) / 2
+        self.constant = pi ** (-arb(sum(self.shifts)) / 2)
 
     def value(self, s):
         return (self.log_scale * s).exp() * self.constant * prod(
@@ -102,28 +129,29 @@ class GammaFactors:
         exponent = (self.degree * c + sum(self.shifts)) / 2
         return c.zeta() ** self.degree * self.value(c) / angle.cos() ** exponent
 
-    def point_bound(self, c):
-        return 2 * self.strip_bound(c, arb(1)) / (self.decay * PERIOD)
+    def point_bound(self, c, period=PERIOD):
+        return 2 * self.strip_bound(c, arb(1)) / (self.decay * period)
 
 
 TETRAHEDRAL = GammaFactors(3136, (0, 1, 1))
 
 
-def boundary_polynomial(coeff, radius):
-    """Values of the truncated Dirichlet series on RIGHT+i*j*STEP."""
-    last = radius * SAMPLES // PERIOD
+def boundary_polynomial(coeff, radius, rule=DEFAULT_RULE):
+    """Values of the truncated Dirichlet series on the right sampling line."""
+    last = radius * rule.samples // rule.period
+    step = rule.step
     values = [acb(1) for _ in range(last + 1)]
     block = 64
     for n, a_n in enumerate(coeff):
         if n < 2 or not a_n:
             continue
-        angle = -arb(n).log() * STEP
+        angle = -arb(n).log() * step
         unit = acb(0, angle).exp()
         large_step = acb(0, block * angle).exp()
         fine = [acb(1)]
         for _ in range(1, block):
             fine.append(fine[-1] * unit)
-        weight = acb(arb(a_n) / (arb(n) ** RIGHT))
+        weight = acb(arb(a_n) / (arb(n) ** rule.right))
         for start in range(0, last + 1, block):
             for k in range(min(block, last + 1 - start)):
                 values[start + k] += weight * fine[k]
@@ -131,66 +159,72 @@ def boundary_polynomial(coeff, radius):
     return values
 
 
-def fourier_coefficients(coeff, factors, radius):
-    boundary = boundary_polynomial(coeff, radius)
-    raw_tail = arb(2).zeta() ** factors.degree * arb(len(coeff) - 1) ** (2 - RIGHT)
+def fourier_coefficients(coeff, factors, radius, rule=DEFAULT_RULE):
+    boundary = boundary_polynomial(coeff, radius, rule)
+    samples, modes = rule.samples, rule.modes
+    period, freq, step = rule.period, rule.frequency, rule.step
+    right, extra = rule.right, rule.extra
+    raw_tail = arb(2).zeta() ** factors.degree * arb(len(coeff) - 1) ** (2 - right)
     box = arb(0, raw_tail)
-    bins = [acb(0) for _ in range(SAMPLES)]
+    bins = [acb(0) for _ in range(samples)]
     for j, partial in enumerate(boundary):
-        s = acb(RIGHT, j * STEP)
+        s = acb(right, j * step)
         value = factors.value(s) * (partial + acb(box, box))
-        bins[j % SAMPLES] += value
+        bins[j % samples] += value
         if j:
-            bins[-j % SAMPLES] += value.conjugate()
+            bins[-j % samples] += value.conjugate()
     sampled = acb.dft(bins)
     decay = factors.decay
-    omitted = (2 * factors.strip_bound(RIGHT, arb(1)) * (-decay * (radius + STEP)).exp()
-               / (SAMPLES * (1 - (-decay * STEP).exp())))
-    aliases = (2 * factors.point_bound(RIGHT + EXTRA)
-               * (-EXTRA * FREQ * (SAMPLES - MODES)).exp()
-               / (1 - (-EXTRA * FREQ * SAMPLES).exp()))
+    omitted = (2 * factors.strip_bound(right, arb(1)) * (-decay * (radius + step)).exp()
+               / (samples * (1 - (-decay * step).exp())))
+    aliases = (2 * factors.point_bound(right + extra, period)
+               * (-extra * freq * (samples - modes)).exp()
+               / (1 - (-extra * freq * samples).exp()))
     coeff_error = arb(0, omitted + aliases)
-    a = RIGHT - HALF
+    a = right - HALF
     coefficients = []
-    for m in range(MODES + 1):
-        coefficients.append((sampled[m].real / SAMPLES + coeff_error)
-                            * (-a * FREQ * m).exp())
+    for m in range(modes + 1):
+        coefficients.append((sampled[m].real / samples + coeff_error)
+                            * (-a * freq * m).exp())
 
-    rate = (a - 3 * HALF) * FREQ
-    high_modes = (2 * factors.point_bound(RIGHT) * (-rate * (MODES + 1)).exp()
+    rate = (a - 3 * HALF) * freq
+    high_modes = (2 * factors.point_bound(right, period) * (-rate * (modes + 1)).exp()
                   / (1 - (-rate).exp()))
-    images = (2 * factors.strip_bound(2, arb(1)) * (-decay * (PERIOD - HEIGHT)).exp()
-              / (1 - (-decay * PERIOD).exp()))
+    images = (2 * factors.strip_bound(2, arb(1)) * (-decay * (period - rule.height)).exp()
+              / (1 - (-decay * period).exp()))
     return coefficients, arb(0, high_modes + images)
 
 
 class Completed:
-    """Fourier enclosures valid for |Re z| <= 64, |Im z| <= 3/2."""
-    def __init__(self, coefficients=None, factors=TETRAHEDRAL, radius=RADIUS):
+    """Fourier enclosures valid for |Re z| <= rule.height, |Im z| <= 3/2."""
+    def __init__(self, coefficients=None, factors=TETRAHEDRAL, radius=RADIUS, rule=DEFAULT_RULE):
         if coefficients is None:
             coefficients = artin_coefficients(CUTOFF)
         self.factors = factors
-        self.coeff, self.rest = fourier_coefficients(coefficients, factors, radius)
+        self.rule = rule
+        self.coeff, self.rest = fourier_coefficients(coefficients, factors, radius, rule)
         self.poly = acb_poly(self.coeff)
 
     def line(self, numerator):
-        phase = acb(2 * arb(numerator) / (DEN * PERIOD)).exp_pi_i()
+        phase = acb(2 * arb(numerator) / (self.rule.denominator * self.rule.period)).exp_pi_i()
         return 2 * self.poly(phase).real - self.coeff[0] + self.rest
 
     def top(self, offset):
-        # z=64-i*offset, and exp(i*FREQ*64)=i exactly.
-        mag = (FREQ * offset).exp()
+        # At one quarter of the period the top phase is i exactly.
+        mag = (self.rule.frequency * offset).exp()
         return (self.poly(acb(0, mag)) + self.poly(acb(0, -1 / mag))
                 - self.coeff[0] + acb(self.rest, self.rest))
 
     def grid(self, divisions):
-        length = PERIOD * divisions
+        length = self.rule.period * divisions
+        if 2 * self.rule.modes >= length:
+            raise ValueError("critical-line grid aliases retained modes")
         data = [acb(0) for _ in range(length)]
         data[0] = acb(self.coeff[0])
-        for m in range(1, MODES + 1):
+        for m in range(1, self.rule.modes + 1):
             data[m] = data[-m] = acb(self.coeff[m])
         points = acb.dft(data)
-        return [z.real + self.rest for z in points[:HEIGHT * divisions + 1]]
+        return [z.real + self.rest for z in points[:self.rule.height * divisions + 1]]
 
 
 def sign(value):
@@ -201,36 +235,39 @@ def sign(value):
     raise ArithmeticError(f"Unresolved critical-line sign: {value}")
 
 
-def locate(completed):
-    divisions = 64
+def locate(completed, divisions=64):
+    denominator = completed.rule.denominator
+    if denominator % divisions:
+        raise ValueError("grid must divide the target denominator")
     signs = [sign(v) for v in completed.grid(divisions)]
     rows = []
     for j in range(1, len(signs)):
         if signs[j - 1] == signs[j]:
             continue
-        lo, hi = (j - 1) * DEN // divisions, j * DEN // divisions
+        lo, hi = (j - 1) * denominator // divisions, j * denominator // divisions
         while hi - lo > 1:
             mid = (lo + hi) // 2
             if sign(completed.line(mid)) == signs[j - 1]:
                 lo = mid
             else:
                 hi = mid
-        rows.append((lo, hi, DEN))
+        rows.append((lo, hi, denominator))
     return rows
 
 
 def verify_signs(completed, rows):
     previous = 0
+    target, height = completed.rule.denominator, completed.rule.height
     for lo, hi, denominator in rows:
-        if not (denominator == DEN and previous < lo < hi < HEIGHT * DEN and hi - lo == 1):
+        if not (denominator == target and previous < lo < hi < height * target and hi - lo == 1):
             raise ArithmeticError(f"Invalid isolating interval: {(lo, hi, denominator)}")
         if sign(completed.line(lo)) == sign(completed.line(hi)):
             raise ArithmeticError(f"Equal signs at {lo}, {hi}")
         previous = hi
 
 
-def half_winding(completed):
-    mesh, degree = 64, 20
+def half_winding(completed, mesh=64, degree=20):
+    height = completed.rule.height
     segments = 3 * mesh // 2
     values = [completed.top(arb(j) / mesh) for j in range(segments + 1)]
     differences = [values]
@@ -238,10 +275,10 @@ def half_winding(completed):
         row = differences[-1]
         differences.append([right - left for left, right in zip(row, row[1:])])
 
-    # Unit disks about [1/2,2]+64i lie between -2 and 3 in real part.
+    # Unit disks about the top half-edge lie between -2 and 3 in real part.
     angle = arb(3) / 2
     factors = completed.factors
-    disk_bound = factors.strip_bound(3, angle) * (-factors.decay * angle * (HEIGHT - 1)).exp()
+    disk_bound = factors.strip_bound(3, angle) * (-factors.decay * angle * (height - 1)).exp()
     remainder = disk_bound * factorial(degree) / mesh ** (degree + 1)
     change = arb(0)
     margins = []
@@ -259,7 +296,7 @@ def half_winding(completed):
         margins.append(margin.lower())
         change += (values[j + 1] / values[j]).arg()
 
-    s = acb(2, HEIGHT)
+    s = acb(2, height)
     L_right = values[-1] / factors.value(s)
     if not (factors.degree * arb(2).zeta().log() < PI / 2 and L_right.real > 0):
         raise ArithmeticError("Euler-product phase is ambiguous")

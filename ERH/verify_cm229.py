@@ -12,7 +12,7 @@ from pathlib import Path
 from flint import arb, fmpz_poly, nmod_poly
 
 from verify_tetra3136 import (
-    CUTOFF, FREQ, HALF, HEADER, PI, Completed, GammaFactors,
+    CUTOFF, HALF, HEADER, PI, Completed, GammaFactors,
     half_winding, locate, verify_signs,
 )
 
@@ -60,18 +60,24 @@ def coefficients(limit):
 
 
 def completed_on_real_axis(function, s):
-    mag = (FREQ * (s - HALF)).exp()
+    mag = (function.rule.frequency * (s - HALF)).exp()
     return ((function.poly(mag) + function.poly(1 / mag)).real
             - function.coeff[0] + function.rest)
 
 
-def height_difference(function):
-    """Stable Faltings height of a mixed type minus that of an induced type."""
+def log_derivative_at_one(function):
+    """Certified logarithmic derivative of either Artin factor at one."""
     h = arb(2) ** -64
     slope = (completed_on_real_axis(function, 1 + h) - completed_on_real_axis(function, 1 - h)) / (2*h)
     cauchy = function.factors.strip_bound(2, arb(1)) * h*h / (1 - h*h)
     log_derivative = (slope + arb(0, cauchy)) / completed_on_real_axis(function, arb(1))
-    log_derivative -= function.factors.log_scale + arb(1).digamma()
+    gamma_term = sum(((arb(1) + shift) / 2).digamma() / 2 for shift in function.factors.shifts)
+    return log_derivative - function.factors.log_scale - gamma_term
+
+
+def height_difference(function):
+    """Stable Faltings height of a mixed type minus that of an induced type."""
+    log_derivative = log_derivative_at_one(function)
     qtr = arb(1) / 4
     beta_log_derivative = (arb.const_euler() + (2 * PI).log()
                            - 2 * (qtr.lgamma() - (3 * qtr).lgamma()))
@@ -94,9 +100,9 @@ def unit_errors():
     return bounds
 
 
-def read_rows():
+def read_rows(path=FILE):
     blocks = {name: [] for name in FACTORS}
-    with FILE.open(encoding="utf-8", newline="") as handle:
+    with path.open(encoding="utf-8", newline="") as handle:
         reader = csv.reader(handle)
         if tuple(next(reader)) != ("factor", *HEADER):
             raise ValueError("Unexpected interval header")
