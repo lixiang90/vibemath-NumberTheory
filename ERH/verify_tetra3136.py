@@ -6,7 +6,7 @@ All sign and winding decisions use enclosing Arb balls.
 
 import argparse
 import csv
-from math import factorial, isqrt
+from math import factorial, isqrt, prod
 from pathlib import Path
 
 from flint import acb, acb_poly, arb, ctx, nmod_poly
@@ -28,7 +28,6 @@ PI = arb.pi()
 HALF = arb(1) / 2
 STEP = arb(PERIOD) / SAMPLES
 FREQ = 2 * PI / PERIOD
-DECAY = arb(3) / 2
 
 
 def artin_coefficients(limit):
@@ -81,27 +80,38 @@ def artin_coefficients(limit):
     return coeff
 
 
-def gamma_factor(s):
-    return ((arb(56).log() - 3 * PI.log() / 2) * s).exp() / PI * (
-        (s / 2).gamma() * ((s + 1) / 2).gamma() ** 2
-    )
+class GammaFactors:
+    """Conductor and real gamma shifts of an entire, real, root-number +1 factor."""
+    def __init__(self, conductor, shifts):
+        self.shifts = tuple(shifts)
+        self.degree = len(self.shifts)
+        self.decay = arb(self.degree) / 2
+        self.log_scale = (arb(conductor).log() - self.degree * PI.log()) / 2
+        self.constant = PI ** (-arb(sum(self.shifts)) / 2)
+
+    def value(self, s):
+        return (self.log_scale * s).exp() * self.constant * prod(
+            ((s + shift) / 2).gamma() for shift in self.shifts)
+
+    def phase(self, s):
+        return self.log_scale * s.imag + sum(
+            ((s + shift) / 2).lgamma().imag for shift in self.shifts)
+
+    def strip_bound(self, c, angle):
+        c = arb(c)
+        exponent = (self.degree * c + sum(self.shifts)) / 2
+        return c.zeta() ** self.degree * self.value(c) / angle.cos() ** exponent
+
+    def point_bound(self, c):
+        return 2 * self.strip_bound(c, arb(1)) / (self.decay * PERIOD)
 
 
-def strip_bound(c, angle):
-    """C(c,angle) from contour rotation in the three gamma integrals."""
-    c = arb(c)
-    return (c.zeta() ** 3 * gamma_factor(c)
-            / angle.cos() ** ((3 * c + 2) / 2))
+TETRAHEDRAL = GammaFactors(3136, (0, 1, 1))
 
 
-def point_bound(c):
-    return 2 * strip_bound(c, arb(1)) / (DECAY * PERIOD)
-
-
-def boundary_polynomial():
+def boundary_polynomial(coeff, radius):
     """Values of the truncated Dirichlet series on RIGHT+i*j*STEP."""
-    coeff = artin_coefficients(CUTOFF)
-    last = RADIUS * SAMPLES // PERIOD
+    last = radius * SAMPLES // PERIOD
     values = [acb(1) for _ in range(last + 1)]
     block = 64
     for n, a_n in enumerate(coeff):
@@ -121,21 +131,22 @@ def boundary_polynomial():
     return values
 
 
-def fourier_coefficients():
-    boundary = boundary_polynomial()
-    raw_tail = arb(2).zeta() ** 3 * arb(CUTOFF) ** (2 - RIGHT)
+def fourier_coefficients(coeff, factors, radius):
+    boundary = boundary_polynomial(coeff, radius)
+    raw_tail = arb(2).zeta() ** factors.degree * arb(len(coeff) - 1) ** (2 - RIGHT)
     box = arb(0, raw_tail)
     bins = [acb(0) for _ in range(SAMPLES)]
     for j, partial in enumerate(boundary):
         s = acb(RIGHT, j * STEP)
-        value = gamma_factor(s) * (partial + acb(box, box))
+        value = factors.value(s) * (partial + acb(box, box))
         bins[j % SAMPLES] += value
         if j:
             bins[-j % SAMPLES] += value.conjugate()
     sampled = acb.dft(bins)
-    omitted = (2 * strip_bound(RIGHT, arb(1)) * (-DECAY * (RADIUS + STEP)).exp()
-               / (SAMPLES * (1 - (-DECAY * STEP).exp())))
-    aliases = (2 * point_bound(RIGHT + EXTRA)
+    decay = factors.decay
+    omitted = (2 * factors.strip_bound(RIGHT, arb(1)) * (-decay * (radius + STEP)).exp()
+               / (SAMPLES * (1 - (-decay * STEP).exp())))
+    aliases = (2 * factors.point_bound(RIGHT + EXTRA)
                * (-EXTRA * FREQ * (SAMPLES - MODES)).exp()
                / (1 - (-EXTRA * FREQ * SAMPLES).exp()))
     coeff_error = arb(0, omitted + aliases)
@@ -146,16 +157,20 @@ def fourier_coefficients():
                             * (-a * FREQ * m).exp())
 
     rate = (a - 3 * HALF) * FREQ
-    high_modes = 2 * point_bound(RIGHT) * (-rate * (MODES + 1)).exp() / (1 - (-rate).exp())
-    images = (2 * strip_bound(2, arb(1)) * (-DECAY * (PERIOD - HEIGHT)).exp()
-              / (1 - (-DECAY * PERIOD).exp()))
+    high_modes = (2 * factors.point_bound(RIGHT) * (-rate * (MODES + 1)).exp()
+                  / (1 - (-rate).exp()))
+    images = (2 * factors.strip_bound(2, arb(1)) * (-decay * (PERIOD - HEIGHT)).exp()
+              / (1 - (-decay * PERIOD).exp()))
     return coefficients, arb(0, high_modes + images)
 
 
 class Completed:
     """Fourier enclosures valid for |Re z| <= 64, |Im z| <= 3/2."""
-    def __init__(self):
-        self.coeff, self.rest = fourier_coefficients()
+    def __init__(self, coefficients=None, factors=TETRAHEDRAL, radius=RADIUS):
+        if coefficients is None:
+            coefficients = artin_coefficients(CUTOFF)
+        self.factors = factors
+        self.coeff, self.rest = fourier_coefficients(coefficients, factors, radius)
         self.poly = acb_poly(self.coeff)
 
     def line(self, numerator):
@@ -225,7 +240,8 @@ def half_winding(completed):
 
     # Unit disks about [1/2,2]+64i lie between -2 and 3 in real part.
     angle = arb(3) / 2
-    disk_bound = strip_bound(3, angle) * (-3 * angle * (HEIGHT - 1) / 2).exp()
+    factors = completed.factors
+    disk_bound = factors.strip_bound(3, angle) * (-factors.decay * angle * (HEIGHT - 1)).exp()
     remainder = disk_bound * factorial(degree) / mesh ** (degree + 1)
     change = arb(0)
     margins = []
@@ -244,11 +260,10 @@ def half_winding(completed):
         change += (values[j + 1] / values[j]).arg()
 
     s = acb(2, HEIGHT)
-    L_right = values[-1] / gamma_factor(s)
-    if not (3 * arb(2).zeta().log() < PI / 2 and L_right.real > 0):
+    L_right = values[-1] / factors.value(s)
+    if not (factors.degree * arb(2).zeta().log() < PI / 2 and L_right.real > 0):
         raise ArithmeticError("Euler-product phase is ambiguous")
-    gamma_phase = (HEIGHT * (arb(56).log() - 3 * PI.log() / 2)
-                   + (s / 2).lgamma().imag + 2 * ((s + 1) / 2).lgamma().imag)
+    gamma_phase = factors.phase(s)
     return (gamma_phase + L_right.arg() - change) / PI, min(margins)
 
 
