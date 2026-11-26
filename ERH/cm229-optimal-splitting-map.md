@@ -107,6 +107,8 @@ $$
 
 有 $\log r_n=D_n+O(\sqrt n)$，分歧素数的贡献包含在误差内。于是 $C_*(Y)/(4W)$ 与 $W^{-1}\sum_n k_n[D_n]_+$ 之差为 $O(\log(2Y))$。原目标归结为对每个 $\eta>0$，在任意远的完整窗口上取得 $\sum_n k_n[D_n]_+\le WY^\eta$。
 
+后续工作用 $M/B$ 的三阶 Hecke 特征及加法大筛，控制了 $\sqrt{2n}<p\le(2n)^{4/7}$ 上的绝对值累计量，并算出 $D_n-\log r_n$ 的平方根主项。[三阶特征的抵消区间](cm229-cubic-hecke-carries.md) · [素数平方的偏移](cm229-prime-carry-drift.md)
+
 ## 清除分母的代价
 
 将 $r_n=u_n/v_n$ 写为互素正整数之比。由 (5) 和小素数估计，

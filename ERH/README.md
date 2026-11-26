@@ -7,6 +7,8 @@
 ## 研究成果
 
 - [判别式 229 的最优格映射在临界线上的对数渐近式](<cm229-critical-logarithm.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-critical-logarithm.html>) · 2026-11-27
+- [三阶 Hecke 特征在平方根以上进位素数中的抵消区间](<cm229-cubic-hecke-carries.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-cubic-hecke-carries.html>) · 2026-11-27
+- [素数平方的偏移与三阶 Hecke 进位和的累计正部](<cm229-prime-carry-drift.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-prime-carry-drift.html>) · 2026-11-27
 - [完整窗口上的正部积分与整值多项式格的正次数](<cm229-binomial-slopes.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-binomial-slopes.html>) · 2026-11-27
 - [用 CM 约化的局部长度识别 x/48 素数，并消去几何斜坡的线性项](<cm229-local-length-window.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-local-length-window.html>) · 2026-11-27
 - [用混合 CM 型构造达到最小奇异值代价的整同构](<cm229-optimal-splitting-map.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-optimal-splitting-map.html>) · 2026-11-27

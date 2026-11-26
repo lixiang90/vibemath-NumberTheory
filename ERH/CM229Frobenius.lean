@@ -121,6 +121,30 @@ theorem single_mixed_relative_split (j : Fin 6) (iInert : Bool) (minority : Fin 
   revert j iInert minority
   decide +kernel
 
+/-- Trace of the standard representation on the three roots. -/
+def standardTrace (g : List Nat) : Int :=
+  Int.ofNat ((List.range 3).filter fun i => g[i]?.getD i == i).length - 1
+
+def squarePermutation (g : List Nat) : List Nat :=
+  (List.range 3).map fun i => g[g[i]?.getD i]?.getD i
+
+/-- The first prime coefficient of the induced cubic character. -/
+theorem first_carry_trace (j : Fin 6) (iInert : Bool) :
+    let g := permutations[j.val]?.getD []
+    (if iInert then 0 else 2) * standardTrace g =
+      2 * (if oddPermutation g || iInert then 0
+           else if mixedRelativeSplit g iInert 0 then 2 else -1) := by
+  revert j iInert
+  decide +kernel
+
+/-- The trivial constituent at squares accounts for the square-root drift. -/
+theorem square_carry_trace (j : Fin 6) :
+    let g := permutations[j.val]?.getD []
+    standardTrace (squarePermutation g) =
+      1 - (if oddPermutation g then (-1 : Int) else 1) + standardTrace g := by
+  revert j
+  decide +kernel
+
 def cubicRoots (p : Nat) : List Nat :=
   (List.range p).filter fun x => (x^3 + 1) % p == (4*x) % p
 
