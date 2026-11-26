@@ -9,6 +9,8 @@
 - [判别式 229 的全实三次域及其 CM 扩张的两类高度与 192 个零点](<cm229-heights-and-zeros.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-heights-and-zeros.html>) · 2026-11-26
 - [全实域和 CM 域中成对的二次 Hecke 素数窗口](<real-cm-prime-windows.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/real-cm-prime-windows.html>) · 2026-11-26
 - [一个四面体数域的 123 个零点与完全分裂素数的负偏差](<tetra3136-prime-bias.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/tetra3136-prime-bias.html>) · 2026-11-26
+- [在原 WinPair 同余条件下用双惰性素数恢复固定数域的素数和](<winpair-inert-transfer.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/winpair-inert-transfer.html>) · 2026-11-26
+- [CM 型轮换的 Frobenius 次数与判别式 229 的约化斜率](<cm229-frobenius-and-heights.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-frobenius-and-heights.html>) · 2026-11-26
 - [从连续幂次窗口到判别式 −23 的离散素数判据](<cubic23-sparse-windows.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cubic23-sparse-windows.html>) · 2026-11-25
 - [高度 8192 的三次域零点证书与六个更小的二进斜率](<cubic23-height-8192.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cubic23-height-8192.html>) · 2026-11-25
 - [两个 theta 权怎样保留判别式 −23 的 Stepanov 整除次数](<cubic23-stepanov-content.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cubic23-stepanov-content.html>) · 2026-11-25
