@@ -8,6 +8,7 @@
 
 - [判别式 229 的准黎曼边界、三阶特征的两个方向与高度 256 的零点](<cm229-qrh-boundary.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-qrh-boundary.html>) · 2026-11-27
 - [判别式 229 的最优格映射在临界线上的对数渐近式](<cm229-critical-logarithm.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-critical-logarithm.html>) · 2026-11-27
+- [判别式 7168 的四次 CM 域与判别式 229 三次域的 CM 扩张](<cm7168-erh-comparison.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm7168-erh-comparison.html>) · 2026-11-27
 - [三阶 Hecke 互素对的整窗平滑与有限高度判据](<cm229-coprime-smoothing.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-coprime-smoothing.html>) · 2026-11-27
 - [三阶 Hecke 零点在素数余因子与光滑余因子之间的分配](<cm229-signed-zero-modes.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-signed-zero-modes.html>) · 2026-11-27
 - [三阶 Hecke 双线性和中可以剔除的因子区间](<cm229-type-ii-ranges.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-type-ii-ranges.html>) · 2026-11-27
@@ -18,6 +19,7 @@
 - [一般数域准黎曼半平面的数值边界与立方自由和的两变量抵消](<hecke-qrh-contact.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/hecke-qrh-contact.html>) · 2026-11-27
 - [用 CM 约化的局部长度识别 x/48 素数，并消去几何斜坡的线性项](<cm229-local-length-window.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-local-length-window.html>) · 2026-11-27
 - [用混合 CM 型构造达到最小奇异值代价的整同构](<cm229-optimal-splitting-map.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-optimal-splitting-map.html>) · 2026-11-27
+- [用一个七次幂自由理想和读出两个 CM 域的准黎曼边界](<cm-powerfree-boundary.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm-powerfree-boundary.html>) · 2026-11-27
 - [原互素对在对数频带上检出完整窗口的精确幂指数](<cm229-logarithmic-band.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-logarithmic-band.html>) · 2026-11-27
 - [原卷积中逐项消失的互素对与三阶 Hecke 零点的余因子范围](<cm229-coprime-cofactors.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-coprime-cofactors.html>) · 2026-11-27
 - [原双线性和的幂指数集中在一个大素数与一个小余因子上](<cm229-type-ii-large-prime.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/ERH/articles/cm229-type-ii-large-prime.html>) · 2026-11-27

@@ -55,11 +55,14 @@ def rational_masses():
     return 2+euler-(4*pi).log(), (4/pi).log()-euler+2*beta_slope
 
 
-class CompletedBeta:
-    def __init__(self):
+class CompletedRealDirichlet:
+    """Direct Arb values for a nonprincipal primitive real Dirichlet character."""
+    def __init__(self, chi):
+        if not (chi.is_primitive() and chi.is_real() and not chi.is_principal()):
+            raise ValueError("a nonprincipal primitive real character is required")
         self.rule = replace(RULE, denominator=RATIONAL_DEN)
-        self.factors = GammaFactors(4, (1,))
-        self.chi = dirichlet_char(4, 3)
+        self.factors = GammaFactors(chi.conductor(), (chi.parity(),))
+        self.chi = chi
 
     def top(self, offset):
         s = acb(arb(1)/2+offset, self.rule.height)
@@ -69,7 +72,7 @@ class CompletedBeta:
         s = acb(arb(1)/2, arb(numerator)/self.rule.denominator)
         value = self.factors.value(s)*s.dirichlet_l(self.chi)
         if not value.imag.contains(0):
-            raise ArithmeticError("beta critical-line enclosure is not real")
+            raise ArithmeticError("Dirichlet critical-line enclosure is not real")
         return value.real
 
     def grid(self, divisions):
@@ -77,28 +80,38 @@ class CompletedBeta:
         return [self.line(j*step) for j in range(self.rule.height*divisions+1)]
 
 
-def rational_counts():
+class CompletedBeta(CompletedRealDirichlet):
+    def __init__(self):
+        super().__init__(dirichlet_char(4, 3))
+
+
+def indexed_zeta_count(height):
     # FLINT certifies individual indexed zeta zeros, including their index.
     index = 1
-    while acb.zeta_zero(2*index).imag < RULE.height:
+    while acb.zeta_zero(2*index).imag < height:
         index *= 2
     lo, hi = index, 2*index
     while hi-lo > 1:
         mid = (lo+hi)//2
-        if acb.zeta_zero(mid).imag < RULE.height:
+        if acb.zeta_zero(mid).imag < height:
             lo = mid
         else:
             hi = mid
-    if not acb.zeta_zero(lo).imag < RULE.height < acb.zeta_zero(hi).imag:
+    if not acb.zeta_zero(lo).imag < height < acb.zeta_zero(hi).imag:
         raise ArithmeticError("height touches an indexed zeta zero interval")
+    return lo
+
+
+def rational_counts():
+    nz = indexed_zeta_count(RULE.height)
     beta_half, _ = half_winding(CompletedBeta(), mesh=128, degree=32)
     integer = beta_half.unique_fmpz()
     if integer is None or (2*beta_half).unique_fmpz() != 2*integer:
         raise ArithmeticError("beta rectangle winding is ambiguous")
-    return lo, int(integer)
+    return nz, int(integer)
 
 
-def rational_intervals(nz, nd):
+def indexed_zeta_intervals(nz):
     rows = []
     for zero in acb.zeta_zeros(1, nz):
         scaled = RATIONAL_DEN*zero.imag
@@ -106,6 +119,11 @@ def rational_intervals(nz, nd):
         if lo is None or not (zero.real == arb(1)/2 and lo < scaled < lo+1):
             raise ArithmeticError("an indexed zeta zero is not inside its critical-line interval")
         rows.append((int(lo), int(lo)+1, RATIONAL_DEN))
+    return rows
+
+
+def rational_intervals(nz, nd):
+    rows = indexed_zeta_intervals(nz)
     beta = CompletedBeta()
     beta_rows = locate(beta, divisions=4)
     verify_signs(beta, beta_rows)
@@ -125,7 +143,7 @@ def separation(blocks):
     ordered.sort()
     gap = min(b[0]-a[1] for a, b in zip(ordered, ordered[1:]))
     if gap <= 0:
-        raise ArithmeticError("two of the four factors' isolating intervals meet")
+        raise ArithmeticError("two isolating intervals meet")
     return gap
 
 
