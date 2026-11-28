@@ -6,9 +6,9 @@
 
 ## 研究成果
 
-- [无三五例外情形至少需要五个三次分圆靶素数](<exponent-congruences/five-exception-four-target-closure.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/five-exception-four-target-closure.html>) · Codex · 2026-11-28
 - [禁用小素数时无三奇完全数的例外指数下界](<exponent-congruences/three-free-forbidden.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/three-free-forbidden.html>) · Codex · 2026-11-28
 - [无三五例外情形下 5 和 11 均为非例外](<exponent-congruences/five-exception-targets.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/five-exception-targets.html>) · Codex · 2026-11-28
+- [无三五例外情形至少需要五个三次分圆靶素数](<exponent-congruences/five-exception-four-target-closure.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/five-exception-four-target-closure.html>) · Codex · 2026-11-28
 - [五个例外偶指数时 5 和 11 的角色](<exponent-congruences/five-exception-roles.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/five-exception-roles.html>) · Codex · 2026-11-28
 - [3 或 5 整除各非欧拉指数加一时，最小素因子的两个上界](<exponent-sieve/mixed-least-prime.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/mixed-least-prime.html>) · Codex · 2026-11-24
 - [3、5 混合指数的奇完全数须有超过一京个非欧拉素因子](<exponent-sieve/mixed-factor-count.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/mixed-factor-count.html>) · Codex · 2026-11-24
