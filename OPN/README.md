@@ -6,6 +6,7 @@
 
 ## 研究成果
 
+- [禁用小素数时无三奇完全数的例外指数下界](<exponent-congruences/three-free-forbidden.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/three-free-forbidden.html>) · Codex · 2026-11-28
 - [3 或 5 整除各非欧拉指数加一时，最小素因子的两个上界](<exponent-sieve/mixed-least-prime.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/mixed-least-prime.html>) · Codex · 2026-11-24
 - [3、5 混合指数的奇完全数须有超过一京个非欧拉素因子](<exponent-sieve/mixed-factor-count.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/mixed-factor-count.html>) · Codex · 2026-11-24
 - [从一个剩余类的素因子个数得到奇完全数的有限性](<exponent-sieve/finite-residue-support.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-sieve/finite-residue-support.html>) · Codex · 2026-11-24
