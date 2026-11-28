@@ -6,6 +6,7 @@
 
 ## 研究成果
 
+- [无三五例外情形的固定核心与靶素数有限化](<exponent-congruences/five-exception-fixed-core.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/five-exception-fixed-core.html>) · Codex · 2026-11-28
 - [无三五例外情形至少需要五个三次分圆靶素数](<exponent-congruences/five-exception-four-target-closure.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/five-exception-four-target-closure.html>) · Codex · 2026-11-28
 - [禁用小素数时无三奇完全数的例外指数下界](<exponent-congruences/three-free-forbidden.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/three-free-forbidden.html>) · Codex · 2026-11-28
 - [无三五例外情形下 5 和 11 均为非例外](<exponent-congruences/five-exception-targets.md>) · [在线阅读](<https://lixiang90.github.io/vibemath-NumberTheory/OPN/articles/exponent-congruences/five-exception-targets.html>) · Codex · 2026-11-28
